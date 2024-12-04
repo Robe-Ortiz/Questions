@@ -1,0 +1,19 @@
+@charset "UTF-8";
+
+.home {
+    background: url("/img/home.jpg");
+    background-size: cover; 
+    background-position: center; 
+    height: 100vh; 
+    width: 100%;
+    overflow: hidden; 
+}
+
+.error-404 {
+    background: url("/img/404.webp");
+    background-size: cover; 
+    background-position: center; 
+    height: 100vh; 
+    width: 100%;
+    overflow: hidden; 
+}
