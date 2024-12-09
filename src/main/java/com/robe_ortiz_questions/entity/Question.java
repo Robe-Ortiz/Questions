@@ -1,5 +1,8 @@
 package com.robe_ortiz_questions.entity;
 
+import jakarta.validation.constraints.NotNull;
+
+
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
@@ -7,8 +10,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
+
 import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
@@ -23,7 +25,7 @@ import jakarta.persistence.InheritanceType;
 public abstract class Question {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @NotNull
     private Long id;
 
     @Column(name = "question")
@@ -39,9 +41,10 @@ public abstract class Question {
 	}
 
 
-	public Question(String question, CategoryOfQuestion category) {
-		this.question = question;
-		this.category = category;
+	public Question(Long id, String question, CategoryOfQuestion category) {
+	    this.id = id;
+	    this.question = question;
+	    this.category = category;
 	}
 	
 

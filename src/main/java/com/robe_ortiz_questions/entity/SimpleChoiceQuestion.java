@@ -14,15 +14,11 @@ public class SimpleChoiceQuestion extends Question {
     private String correctAnswer;
     
     public SimpleChoiceQuestion() {}
-           
-    public SimpleChoiceQuestion(String question, CategoryOfQuestion category) {
-		super(question, category);
-	}
-
-	public SimpleChoiceQuestion(String question, CategoryOfQuestion category, List<String> answers, String correctAnswer) {
-		super(question, category);
+               
+	public SimpleChoiceQuestion(Long id, String question, CategoryOfQuestion category, List<String> answers, String correctAnswer) {
+		super(id, question, category);
 		this.answers = answers;
-	    this.correctAnswer = correctAnswer;
+		this.correctAnswer = correctAnswer;
 	}
 
 	public List<String> getAnswers() {

@@ -1,6 +1,7 @@
 package com.robe_ortiz_questions.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.orm.jpa.JpaSystemException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,7 +29,12 @@ public class QuestionController {
 	
 	@GetMapping("/cargar/{fileName}")
 	public String processQuestionsFromTheServerFile(@PathVariable("fileName") String fileName, Model model) {	    
-	    questionService.processQuestionsFromTheServerFile("static/data/" + fileName + ".json");
+	    try {
+	    	questionService.processQuestionsFromTheServerFile("static/data/" + fileName + ".json");
+	    }catch (JpaSystemException e) {
+			System.err.println("Failure to load server file questions");
+			e.printStackTrace();
+		}
 	    model.addAttribute("questions", questionService.getAllQuestions());
 	    return "redirect:/question/all";
 	}
@@ -46,22 +52,16 @@ public class QuestionController {
 	}
 	
 	@PostMapping("/upload")
-    public String uploadQuestionFromTheFormFile(@RequestParam("file") MultipartFile file, Model model) {
-        try {
-            // Convertimos el archivo MultipartFile en una cadena JSON
-            String jsonContent = new String(file.getBytes());
-
-            // Llamamos al método processQuestions para procesar el archivo
+    public String uploadQuestionFromTheFormFile(@RequestParam MultipartFile file, Model model) {
+        try {            
+            String jsonContent = new String(file.getBytes());     
             questionService.processQuestionsFromTheFormFile(jsonContent);
-
-            // Redirigimos a la vista que muestra todas las preguntas
             model.addAttribute("questions", questionService.getAllQuestions());
-            return "questions";  // Asegúrate de que esta vista exista
-
+            return "questions";  
         } catch (Exception e) {
             e.printStackTrace();
             model.addAttribute("error", "Failed to process the file");
-            return "add-question-file";  // Vista de carga de archivo en caso de error
+            return "add-question-file";  
         }
     }	
 }
