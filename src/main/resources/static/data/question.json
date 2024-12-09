@@ -1,0 +1,122 @@
+[
+  {
+    "question": "En Java, una clase puede extender múltiples clases a la vez.",
+    "answer": false,
+    "typeOfQuestion": "TRUE_OR_FALSE",
+    "category": "PROGRAMACION"
+  },
+  {
+    "question": "El método 'main' es el punto de entrada de una aplicación Java.",
+    "answer": true,
+    "typeOfQuestion": "TRUE_OR_FALSE",
+    "category": "PROGRAMACION"
+  },
+  {
+    "question": "En Java, se puede crear una instancia de una clase abstracta.",
+    "answer": false,
+    "typeOfQuestion": "TRUE_OR_FALSE",
+    "category": "PROGRAMACION"
+  },
+  {
+    "question": "Los métodos estáticos pueden acceder a miembros no estáticos de una clase en Java.",
+    "answer": false,
+    "typeOfQuestion": "TRUE_OR_FALSE",
+    "category": "PROGRAMACION"
+  },
+  {
+    "question": "En Java, el tipo de datos 'int' puede almacenar valores decimales.",
+    "answer": false,
+    "typeOfQuestion": "TRUE_OR_FALSE",
+    "category": "PROGRAMACION"
+  },
+  {
+    "question": "Una interfaz en Java puede tener métodos con implementación.",
+    "answer": true,
+    "typeOfQuestion": "TRUE_OR_FALSE",
+    "category": "PROGRAMACION"
+  },
+  {
+    "question": "Los objetos en Java siempre se pasan por valor.",
+    "answer": true,
+    "typeOfQuestion": "TRUE_OR_FALSE",
+    "category": "PROGRAMACION"
+  },
+  {
+    "question": "Java permite la sobrecarga de operadores como en otros lenguajes como C++.",
+    "answer": false,
+    "typeOfQuestion": "TRUE_OR_FALSE",
+    "category": "PROGRAMACION"
+  },
+  {
+    "question": "En Java, una variable de tipo 'String' es inmutable.",
+    "answer": true,
+    "typeOfQuestion": "TRUE_OR_FALSE",
+    "category": "PROGRAMACION"
+  },
+  {
+    "question": "El uso de 'final' en Java implica que la variable o método no se puede modificar.",
+    "answer": true,
+    "typeOfQuestion": "TRUE_OR_FALSE",
+    "category": "PROGRAMACION"
+  },
+  {
+    "question": "¿Cuál de los siguientes tipos de datos es usado para representar números decimales en Java?",
+    "answers": [
+      "int",
+      "boolean",
+      "double",
+      "char"
+    ],
+    "correctAnswer": "double",
+    "typeOfQuestion": "SINGLE_CHOICE",
+    "category": "PROGRAMACION"
+  },
+  {
+    "question": "¿Qué palabra clave se usa en Java para evitar que una clase sea heredada?",
+    "answers": [
+      "final",
+      "static",
+      "private",
+      "protected"
+    ],
+    "correctAnswer": "final",
+    "typeOfQuestion": "SINGLE_CHOICE",
+    "category": "PROGRAMACION"
+  },
+  {
+    "question": "¿Cuál es el valor por defecto de un booleano en Java?",
+    "answers": [
+      "true",
+      "false",
+      "0",
+      "null"
+    ],
+    "correctAnswer": "false",
+    "typeOfQuestion": "SINGLE_CHOICE",
+    "category": "PROGRAMACION"
+  },
+  {
+    "question": "¿Qué tipo de colección en Java permite elementos duplicados y mantiene el orden de inserción?",
+    "answers": [
+      "HashSet",
+      "TreeSet",
+      "LinkedList",
+      "ArrayList"
+    ],
+    "correctAnswer": "ArrayList",
+    "typeOfQuestion": "SINGLE_CHOICE",
+    "category": "PROGRAMACION"
+  },
+  {
+    "question": "¿Cómo se llama el mecanismo de Java que permite que un objeto se convierta en una instancia de una subclase?",
+    "answers": [
+      "Herencia",
+      "Polimorfismo",
+      "Encapsulamiento",
+      "Abstracción"
+    ],
+    "correctAnswer": "Polimorfismo",
+    "typeOfQuestion": "SINGLE_CHOICE",
+    "category": "PROGRAMACION"
+  }
+]

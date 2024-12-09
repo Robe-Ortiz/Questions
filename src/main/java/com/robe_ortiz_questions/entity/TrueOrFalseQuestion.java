@@ -1,67 +1,39 @@
 package com.robe_ortiz_questions.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
-public class TrueOrFalseQuestion {
+@Table(name = "true_or_false_questions")
+public class TrueOrFalseQuestion extends Question{
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	@Column(name = "answer")
+    private Boolean answer;
+
+	public TrueOrFalseQuestion() {}
 	
-	private String question;
-	
-	private String correctAnswer;
-	
-	private String wrongAnswer;
-
-	
-	public TrueOrFalseQuestion() {
+    public TrueOrFalseQuestion(String question, CategoryOfQuestion category) {
+		super(question, category);
 	}
 
-
-	public Long getId() {
-		return id;
-	}
-
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-
-	public String getQuestion() {
-		return question;
-	}
-
-
-	public void setQuestion(String question) {
-		this.question = question;
-	}
-
-
-	public String getCorrectAnswer() {
-		return correctAnswer;
-	}
-
-
-	public void setCorrectAnswer(String correctAnswer) {
-		this.correctAnswer = correctAnswer;
-	}
-
-
-	public String getWrongAnswer() {
-		return wrongAnswer;
-	}
-
-
-	public void setWrongAnswer(String wrongAnswer) {
-		this.wrongAnswer = wrongAnswer;
+	public TrueOrFalseQuestion(String question, CategoryOfQuestion category, Boolean answer) {
+		super(question, category);
+		this.answer = answer;
+		
 	}
 	
-	
-	
+	public Boolean getAnswer() {
+		return answer;
+	}
+
+	public void setAnswer(Boolean answer) {
+		this.answer = answer;
+	}
+
+	@Override
+	public TypeOfQuestion getTipoDePregunta() {
+		return TypeOfQuestion.TRUE_OR_FALSE;
+	}
+    	
 }

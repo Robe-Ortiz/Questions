@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<div th:replace="~{fragments/header :: head}"></div>
+
+<body class="bg-dark questions">
+	<div th:replace="~{fragments/navbar :: navbar}"></div>
+		
+	 <main class="container mt-5">
+        <h2>Listado de Preguntas</h2>
+
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Pregunta</th>                 
+                    <th>Categoría</th>
+                    <th>Tipo de Pregunta</th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="question : ${questions}">
+                    <td th:text="${question.id}"></td>
+                    <td th:text="${question.question}"></td>
+                    <td th:text="${question.category}"></td>
+                    <td th:text="${question.tipoDePregunta.translate}"></td>                
+                </tr>
+            </tbody>
+        </table>
+    </main>
+	
+	<div th:replace="~{fragments/scripts :: scripts}"></div>	
+</body>
+</html>

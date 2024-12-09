@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="es">
-<head th:replace="fragments/header :: head"></head>
-<body  class="home">
+<div th:replace="~{fragments/header :: head}"></div>
 
-	<div th:replace="fragments/navbar :: navbar"></div>
-<h1>Hola Fabio</h1>
-	<div th:replace="fragments/scripts :: scripts"></div>	
+<body  class="home">
+	<div th:replace="~{fragments/navbar :: navbar}"></div>
+	<div th:replace="~{fragments/scripts :: scripts}"></div>	
 </body>
 </html>
