@@ -1,15 +1,12 @@
 package com.robe_ortiz_questions.service;
 
 import java.io.IOException;
-import java.net.URL;
 import java.nio.file.Files;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.robe_ortiz_questions.entity.Question;
 import com.robe_ortiz_questions.repository.QuestionRepository;
@@ -24,7 +21,16 @@ public class QuestionService {
 		questionRepository.deleteAll();
 	}
 	
-	public List<Question> getAllQuestions() {
+	public long getIdLastQuestion() {
+		Question lastQuestion = questionRepository.findFirstByOrderByIdDesc();
+		return lastQuestion == null ? 0 : lastQuestion.getId();
+	}
+	
+	public Question getQuestionById(long id) {
+		return questionRepository.findById(id).orElse(null);
+	}
+	
+ 	public List<Question> getAllQuestions() {
 		return questionRepository.findAll(Sort.by(Sort.Direction.ASC, "id"));
 	}
 

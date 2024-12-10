@@ -1,16 +1,12 @@
 package com.robe_ortiz_questions.entity;
 
 import jakarta.validation.constraints.NotNull;
-
-
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
-
 import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
@@ -20,7 +16,8 @@ import jakarta.persistence.InheritanceType;
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "typeOfQuestion")
 @JsonSubTypes({
     @JsonSubTypes.Type(value = TrueOrFalseQuestion.class, name = "TRUE_OR_FALSE"),
-    @JsonSubTypes.Type(value = SimpleChoiceQuestion.class, name = "SINGLE_CHOICE")
+    @JsonSubTypes.Type(value = SimpleChoiceQuestion.class, name = "SINGLE_CHOICE"),
+    @JsonSubTypes.Type(value = MultipleChoiceQuestion.class, name = "MULTIPLE_CHOICE")
 })
 public abstract class Question {
 
@@ -34,8 +31,6 @@ public abstract class Question {
     @Enumerated(EnumType.STRING)  
     @Column(name = "category")
     private CategoryOfQuestion category;
-
-    
     
 	public Question() {
 	}
@@ -68,11 +63,9 @@ public abstract class Question {
 		return category;
 	}
 
-
 	public void setCategory(CategoryOfQuestion category) {
 		this.category = category;
 	}
-
 
 	public abstract TypeOfQuestion getTipoDePregunta();
 }

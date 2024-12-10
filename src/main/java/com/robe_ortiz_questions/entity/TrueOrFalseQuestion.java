@@ -5,7 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "true_or_false_questions")
+@Table(name = "true_or_false_question")
 public class TrueOrFalseQuestion extends Question{
 
 	@Column(name = "answer")
@@ -29,6 +29,5 @@ public class TrueOrFalseQuestion extends Question{
 	@Override
 	public TypeOfQuestion getTipoDePregunta() {
 		return TypeOfQuestion.TRUE_OR_FALSE;
-	}
-    	
+	}   	
 }

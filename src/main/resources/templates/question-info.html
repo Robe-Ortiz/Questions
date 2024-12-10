@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<div th:replace="~{fragments/header :: head}"></div>
+
+<body class="bg-dark questions">
+	<div th:replace="~{fragments/navbar :: navbar}"></div>
+
+	<main class="container mt-5">
+		<h2>Información sobre la pregunta</h2>
+
+		<div th:if="${question != null}">
+			<table class="mb-5 table table-striped table-bordered">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>Pregunta</th>
+						<th>Categoría</th>
+						<th>Tipo de Pregunta</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td th:text="${question.id}"></td>
+						<td th:text="${question.question}"></td>
+						<td th:text="${question.category}"></td>
+						<td th:text="${question.tipoDePregunta.translate}"></td>
+					</tr>
+				</tbody>
+			</table>
+			<div>
+				<div>
+
+					<div th:if="${question.tipoDePregunta.name() == 'TRUE_OR_FALSE'}">
+						<p>
+							<strong>Respuesta:</strong> <span
+								th:text="${question.answer ? 'Verdadero' : 'Falso'}"></span>
+						</p>
+					</div>
+
+					<div
+						th:if="${question.tipoDePregunta.name() == 'SINGLE_CHOICE' or question.tipoDePregunta.name() == 'MULTIPLE_CHOICE'}">
+						<table class=" mb-5 table table-striped table-bordered">
+							<thead>
+								<tr>
+									<th>Respuesta A</th>
+									<th>Respuesta B</th>
+									<th>Respuesta C</th>
+									<th>Respuesta D</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td
+										th:text="${question.answers[0] != null ? question.answers[0] : 'Respuesta no disponible'}"></td>
+									<td
+										th:text="${question.answers[1] != null ? question.answers[1] : 'Respuesta no disponible'}"></td>
+									<td
+										th:text="${question.answers[2] != null ? question.answers[2] : 'Respuesta no disponible'}"></td>
+									<td
+										th:text="${question.answers[3] != null ? question.answers[3] : 'Respuesta no disponible'}"></td>
+								</tr>
+							</tbody>
+						</table>
+						<p th:if="${question.tipoDePregunta.name() == 'SINGLE_CHOICE'}">
+							<strong>Respuesta correcta:</strong> <span
+								th:text="${question.correctAnswer}"></span>
+						</p>
+						<div th:if="${question.tipoDePregunta.name() == 'MULTIPLE_CHOICE'}">
+							<strong>Respuestas correctas:</strong> 
+							<ul>
+								<li th:text="${question.correctAnswer}"></li>
+								<li th:text="${question.correctAnswer2}"></li>
+							</ul>
+								
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+		<p th:if="${question == null}">No hay ninguna pregunta disponible
+			con ese ID.</p>
+	</main>
+
+	<div th:replace="~{fragments/scripts :: scripts}"></div>
+</body>
+</html>

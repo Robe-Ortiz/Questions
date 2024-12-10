@@ -2,6 +2,7 @@ package com.robe_ortiz_questions.entity;
 
 import java.util.List;
 
+import jakarta.persistence.CollectionTable;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 
@@ -9,6 +10,9 @@ import jakarta.persistence.Entity;
 public class SimpleChoiceQuestion extends Question {
 
 	@ElementCollection
+	   @CollectionTable(
+		        name = "question_answers"
+		    )
     private List<String> answers;
 
     private String correctAnswer;

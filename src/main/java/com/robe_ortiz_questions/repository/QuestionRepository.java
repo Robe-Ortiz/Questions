@@ -8,4 +8,5 @@ import com.robe_ortiz_questions.entity.Question;
 @Repository
 public interface QuestionRepository extends JpaRepository<Question, Long>{
 
+	Question findFirstByOrderByIdDesc();
 }

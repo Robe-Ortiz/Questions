@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.robe_ortiz_questions.entity.Question;
 import com.robe_ortiz_questions.service.QuestionService;
 
 @Controller
@@ -25,6 +26,14 @@ public class QuestionController {
 	public String showAllQuestions(Model model) {		
 		model.addAttribute("questions",questionService.getAllQuestions());
 		return "questions";
+	}
+	
+	
+	@GetMapping("{id}")
+	public String showQuestionById(@PathVariable long id, Model model) {
+		Question question = questionService.getQuestionById(id);
+		model.addAttribute("question", question);		
+		return "question-info";
 	}
 	
 	@GetMapping("/cargar/{fileName}")
@@ -47,7 +56,8 @@ public class QuestionController {
 	}
 	
 	@GetMapping("/new/question-file")
-	public String addQuestionFile() {		
+	public String addQuestionFile(Model model) {
+		model.addAttribute("lastId", questionService.getIdLastQuestion());
 		return "add-question-file";
 	}
 	
