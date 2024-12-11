@@ -19,7 +19,7 @@
             </thead>
             <tbody>
                 <tr th:each="question : ${questions}">
-                    <td th:text="${question.id}"></td>
+                    <td> <a th:href="@{/question/{id}(id=${question.id})}" class="text-reset" role="button"> <span th:text="${question.id}"></span></a></td>
                     <td th:text="${question.question}"></td>
                     <td th:text="${question.category}"></td>
                     <td th:text="${question.tipoDePregunta.translate}"></td>                

@@ -16,8 +16,7 @@ import jakarta.persistence.InheritanceType;
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "typeOfQuestion")
 @JsonSubTypes({
     @JsonSubTypes.Type(value = TrueOrFalseQuestion.class, name = "TRUE_OR_FALSE"),
-    @JsonSubTypes.Type(value = SimpleChoiceQuestion.class, name = "SINGLE_CHOICE"),
-    @JsonSubTypes.Type(value = MultipleChoiceQuestion.class, name = "MULTIPLE_CHOICE")
+    @JsonSubTypes.Type(value = MultipleQuestion.class, name = "MULTIPLE_QUESTION"),
 })
 public abstract class Question {
 

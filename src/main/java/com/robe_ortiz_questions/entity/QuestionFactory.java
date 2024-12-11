@@ -5,7 +5,7 @@ import java.util.List;
 public class QuestionFactory {
 
     @SuppressWarnings("unchecked")
-	public static Question createQuestion(Long id, TypeOfQuestion typeOfQuestion, CategoryOfQuestion category, String question,  Object... extraParams) throws IllegalArgumentException {
+    public static Question createQuestion(Long id, TypeOfQuestion typeOfQuestion, CategoryOfQuestion category, String question, Object... extraParams) throws IllegalArgumentException {
         switch (typeOfQuestion) {
             case TRUE_OR_FALSE:
                 if (extraParams.length != 1 || !(extraParams[0] instanceof Boolean)) {
@@ -13,14 +13,13 @@ public class QuestionFactory {
                 }
                 return new TrueOrFalseQuestion(id, question, category, (Boolean) extraParams[0]);
 
-            case SINGLE_CHOICE:
-                if (extraParams.length != 2 || !(extraParams[0] instanceof List<?>) || !(extraParams[1] instanceof String)) {
-                    throw new IllegalArgumentException("Debe proporcionar una lista de respuestas y una respuesta correcta para una pregunta de tipo SingleChoice.");
+            case MULTIPLE_QUESTION:
+                if (extraParams.length != 2 || !(extraParams[0] instanceof List<?>) || !(extraParams[1] instanceof List<?>)) {
+                    throw new IllegalArgumentException("Debe proporcionar una lista de respuestas incorrectas y una lista de respuestas correctas para una pregunta de tipo MultipleQuestion.");
                 }
-                return new SimpleChoiceQuestion(id, question, category, (List<String>) extraParams[0], (String) extraParams[1]);
+                return new MultipleQuestion(id, question, category, (List<String>) extraParams[0], (List<String>) extraParams[1]);
             default:
                 throw new IllegalArgumentException("Tipo de pregunta no soportado.");
         }
     }
 }
-

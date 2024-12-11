@@ -70,173 +70,70 @@
     "category": "PROGRAMACION"
   },
   {
-    "id": 11,
-    "question": "¿Cuál de los siguientes tipos de datos es usado para representar números decimales en Java?",
-    "answers": [
-      "int",
-      "boolean",
-      "double",
-      "char"
-    ],
-    "correctAnswer": "double",
-    "typeOfQuestion": "SINGLE_CHOICE",
-    "category": "PROGRAMACION"
-  },
-  {
-    "id": 12,
-    "question": "¿Qué palabra clave se usa en Java para evitar que una clase sea heredada?",
-    "answers": [
-      "final",
-      "static",
-      "private",
-      "protected"
-    ],
-    "correctAnswer": "final",
-    "typeOfQuestion": "SINGLE_CHOICE",
-    "category": "PROGRAMACION"
-  },
-  {
-    "id": 13,
-    "question": "¿Cuál es el valor por defecto de un booleano en Java?",
-    "answers": [
-      "true",
-      "false",
-      "0",
-      "null"
-    ],
-    "correctAnswer": "false",
-    "typeOfQuestion": "SINGLE_CHOICE",
-    "category": "PROGRAMACION"
-  },
-  {
-    "id": 14,
-    "question": "¿Qué tipo de colección en Java permite elementos duplicados y mantiene el orden de inserción?",
-    "answers": [
-      "HashSet",
-      "TreeSet",
-      "LinkedList",
-      "ArrayList"
-    ],
-    "correctAnswer": "ArrayList",
-    "typeOfQuestion": "SINGLE_CHOICE",
-    "category": "PROGRAMACION"
-  },
-  {
-    "id": 15,
-    "question": "¿Cómo se llama el mecanismo de Java que permite que un objeto se convierta en una instancia de una subclase?",
-    "answers": [
-      "Herencia",
-      "Polimorfismo",
-      "Encapsulamiento",
-      "Abstracción"
-    ],
-    "correctAnswer": "Polimorfismo",
-    "typeOfQuestion": "SINGLE_CHOICE",
-    "category": "PROGRAMACION"
-  },
-  {
-    "id": 16,
-    "question": "¿Cuál de las siguientes afirmaciones sobre las interfaces en Java es falsa?",
-    "answers": [
-      "Una interfaz puede contener métodos con implementación.",
-      "Una clase puede implementar múltiples interfaces.",
-      "Una interfaz puede extender otras interfaces.",
-      "Una interfaz puede tener atributos."
-    ],
-    "correctAnswer": "Una interfaz puede tener atributos.",
-    "typeOfQuestion": "SINGLE_CHOICE",
-    "category": "PROGRAMACION"
-  },
-  {
-      "id": 17,
-      "question": "¿Cuál es el resultado de intentar dividir un número entero entre cero en Java?",
-      "answers": [
-        "El programa lanza una excepción ArithmeticException.",
-        "El resultado es infinito.",
-        "El programa se detiene sin lanzar ninguna excepción.",
-        "El programa genera una excepción ArrayIndexOutOfBoundsException."
+      "id": 11,
+      "question": "¿Cuál de las siguientes afirmaciones sobre las interfaces en Java es falsa?",
+      "incorrectAnswers": [
+        "Una interfaz puede contener métodos con implementación.",
+        "Una clase puede implementar múltiples interfaces.",
+        "Una interfaz puede extender otras interfaces."
       ],
-      "correctAnswer": "El programa lanza una excepción ArithmeticException.",
-      "typeOfQuestion": "SINGLE_CHOICE",
+      "correctAnswers": ["Una interfaz puede tener atributos."],
+      "typeOfQuestion": "MULTIPLE_QUESTION",
       "category": "PROGRAMACION"
     },
-	{
-	   "id": 18,
-	   "question": "¿Qué palabra clave se utiliza para crear una constante en Java?",
-	   "answers": [
-	     "const",
-	     "final",
-	     "static",
-	     "immutable"
-	   ],
-	   "correctAnswer": "final",
-	   "typeOfQuestion": "SINGLE_CHOICE",
-	   "category": "PROGRAMACION"
-	 },
-	 {
-	   "id": 19,
-	   "question": "¿Qué tipo de estructura de datos se utiliza para almacenar claves únicas con valores asociados en Java?",
-	   "answers": [
-	     "HashMap",
-	     "TreeSet",
-	     "ArrayList",
-	     "LinkedList"
-	   ],
-	   "correctAnswer": "HashMap",
-	   "typeOfQuestion": "SINGLE_CHOICE",
-	   "category": "PROGRAMACION"
-	 },
-	 {
-	   "id": 20,
-	   "question": "¿Cuál de las siguientes afirmaciones es correcta sobre los tipos primitivos en Java?",
-	   "answers": [
-	     "El tipo booleano tiene dos valores posibles: true y false.",
-	     "El tipo int puede almacenar decimales.",
-	     "El tipo char solo puede almacenar un solo dígito numérico.",
-	     "El tipo double no se usa para almacenar números con decimales."
-	   ],
-	   "correctAnswer": "El tipo booleano tiene dos valores posibles: true y false.",
-	   "typeOfQuestion": "SINGLE_CHOICE",
-	   "category": "PROGRAMACION"
-	 },
-	 {
-	   "id": 21,
-	   "question": "¿Cuál de las siguientes opciones es verdadera en relación a las clases abstractas en Java?",
-	   "answers": [
-	     "Una clase abstracta puede tener métodos no abstractos.",
-	     "Una clase abstracta no puede tener atributos.",
-	     "Una clase abstracta nunca puede ser instanciada.",
-	     "Una clase abstracta no puede ser extendida."
-	   ],
-	   "correctAnswer": "Una clase abstracta puede tener métodos no abstractos.",
-	   "typeOfQuestion": "SINGLE_CHOICE",
-	   "category": "PROGRAMACION"
-	 },
-	 {
-	   "id": 22,
-	   "question": "En Java, ¿qué tipo de colección mantiene el orden de los elementos según su inserción?",
-	   "answers": [
-	     "ArrayList",
-	     "HashSet",
-	     "LinkedHashMap",
-	     "TreeSet"
-	   ],
-	   "correctAnswer": "ArrayList",
-	   "typeOfQuestion": "SINGLE_CHOICE",
-	   "category": "PROGRAMACION"
-	 },
-	 {
-	   "id": 27,
-	   "question": "¿Qué opción describe correctamente el uso de la palabra clave 'super' en Java?",
-	   "answers": [
-	     "Se usa para llamar a un constructor de la clase padre.",
-	     "Se usa para declarar una clase hija.",
-	     "Se usa para crear una nueva instancia de un objeto.",
-	     "Se usa para invocar un método de una subclase."
-	   ],
-	   "correctAnswer": "Se usa para llamar a un constructor de la clase padre.",
-	   "correctAnswer2": "Se usa para invocar un método de una subclase.",
-	   "typeOfQuestion": "MULTIPLE_CHOICE",
-	   "category": "PROGRAMACION"
-	 }
+    {
+      "id": 12,
+      "question": "¿Qué palabra clave se utiliza para heredar una clase en Java?",
+      "incorrectAnswers": [
+        "implements",
+        "include",
+        "inherits"
+      ],
+      "correctAnswers": ["extends"],
+      "typeOfQuestion": "MULTIPLE_QUESTION",
+      "category": "PROGRAMACION"
+    },
+    {
+      "id": 13,
+      "question": "¿Cuál de las siguientes afirmaciones sobre los constructores es verdadera?",
+      "incorrectAnswers": [
+        "Un constructor puede ser estático.",
+        "Los constructores deben llamarse explícitamente desde fuera de la clase.",
+        "Un constructor puede tener un tipo de retorno."
+      ],
+      "correctAnswers": [
+        "Los constructores se ejecutan automáticamente al crear un objeto.",
+        "Un constructor puede ser sobrecargado."
+      ],
+      "typeOfQuestion": "MULTIPLE_QUESTION",
+      "category": "PROGRAMACION"
+    },
+    {
+      "id": 14,
+      "question": "¿Qué excepción se lanza cuando intentas acceder a un índice inexistente en un arreglo?",
+      "incorrectAnswers": [
+        "NullPointerException",
+        "ClassCastException",
+        "IOException",
+        "ArithmeticException"
+      ],
+      "correctAnswers": ["ArrayIndexOutOfBoundsException"],
+      "typeOfQuestion": "MULTIPLE_QUESTION",
+      "category": "PROGRAMACION"
+    },
+    {
+      "id": 15,
+      "question": "¿Cuál de las siguientes palabras clave se utiliza para definir una constante en Java?",
+      "incorrectAnswers": [
+        "finalize",
+        "static",
+        "const"
+      ],
+      "correctAnswers": [
+        "final",
+        "static final"
+      ],
+      "typeOfQuestion": "MULTIPLE_QUESTION",
+      "category": "PROGRAMACION"
+    }
 ]

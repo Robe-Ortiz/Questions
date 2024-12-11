@@ -2,8 +2,7 @@ package com.robe_ortiz_questions.entity;
 
 public enum TypeOfQuestion {
     TRUE_OR_FALSE("Verdadero o falso"),
-    SINGLE_CHOICE("Selección simple"),
-	MULTIPLE_CHOICE("Selección múltiple");
+	MULTIPLE_QUESTION("Varias respuestas");
 	
 	private String translate;
 
