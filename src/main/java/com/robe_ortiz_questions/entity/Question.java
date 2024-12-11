@@ -7,6 +7,8 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
@@ -21,10 +23,10 @@ import jakarta.persistence.InheritanceType;
 public abstract class Question {
 
     @Id
-    @NotNull
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
-    @Column(name = "question")
+    @Column(name = "question", unique = true)
     private String question;
 
     @Enumerated(EnumType.STRING)  
@@ -35,8 +37,7 @@ public abstract class Question {
 	}
 
 
-	public Question(Long id, String question, CategoryOfQuestion category) {
-	    this.id = id;
+	public Question(String question, CategoryOfQuestion category) {
 	    this.question = question;
 	    this.category = category;
 	}

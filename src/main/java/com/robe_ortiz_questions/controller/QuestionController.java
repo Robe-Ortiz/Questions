@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.robe_ortiz_questions.entity.CategoryOfQuestion;
 import com.robe_ortiz_questions.entity.Question;
+import com.robe_ortiz_questions.entity.TypeOfQuestion;
 import com.robe_ortiz_questions.service.QuestionService;
 
 @Controller
@@ -29,11 +31,19 @@ public class QuestionController {
 	}
 	
 	
-	@GetMapping("{id}")
+	@GetMapping("/id/{id}")
 	public String showQuestionById(@PathVariable long id, Model model) {
 		Question question = questionService.getQuestionById(id);
-		model.addAttribute("question", question);		
+		model.addAttribute("question", question);
+		model.addAttribute("activateBackButton", true);
 		return "question-info";
+	}
+	
+	@GetMapping("/category/{category}")
+	public String showAllQuestionsByTypeOfQuestion(@PathVariable CategoryOfQuestion category, Model model) {
+		model.addAttribute("questions", questionService.getAllByCategory(category));
+		model.addAttribute("activateBackButton", true);
+		return "questions";
 	}
 	
 	@GetMapping("/cargar/{fileName}")
@@ -56,8 +66,7 @@ public class QuestionController {
 	}
 	
 	@GetMapping("/new/question-file")
-	public String addQuestionFile(Model model) {
-		model.addAttribute("lastId", questionService.getIdLastQuestion());
+	public String addQuestionFile(Model model) {		
 		return "add-question-file";
 	}
 	

@@ -8,6 +8,7 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.robe_ortiz_questions.entity.CategoryOfQuestion;
 import com.robe_ortiz_questions.entity.Question;
 import com.robe_ortiz_questions.repository.QuestionRepository;
 
@@ -20,12 +21,7 @@ public class QuestionService {
 	public void borrarTodo() {
 		questionRepository.deleteAll();
 	}
-	
-	public long getIdLastQuestion() {
-		Question lastQuestion = questionRepository.findFirstByOrderByIdDesc();
-		return lastQuestion == null ? 0 : lastQuestion.getId();
-	}
-	
+		
 	public Question getQuestionById(long id) {
 		return questionRepository.findById(id).orElse(null);
 	}
@@ -33,6 +29,10 @@ public class QuestionService {
  	public List<Question> getAllQuestions() {
 		return questionRepository.findAll(Sort.by(Sort.Direction.ASC, "id"));
 	}
+ 	
+ 	public List<Question> getAllByCategory(CategoryOfQuestion category) {
+ 	    return questionRepository.findByCategoryOrderByIdAsc(category);
+ 	}
 
 	public void processQuestionsFromTheServerFile(String classPath) {
 		ObjectMapper objectMapper = new ObjectMapper();
@@ -43,7 +43,9 @@ public class QuestionService {
 			List<Question> questions = objectMapper.readValue(jsonString,
 					objectMapper.getTypeFactory().constructCollectionType(List.class, Question.class));
 			for (Question question : questions) {
-				questionRepository.save(question);
+	        	if (!questionRepository.existsByQuestion(question.getQuestion())) {
+	        		questionRepository.save(question);
+	        	}
 			}
 		} catch (IOException e) {
 			System.err.println("Failure to load server file questions");
@@ -58,7 +60,10 @@ public class QuestionService {
 	                objectMapper.getTypeFactory().constructCollectionType(List.class, Question.class));
 	       
 	        for (Question question : questions) {
-	            questionRepository.save(question);
+	        	if (!questionRepository.existsByQuestion(question.getQuestion())) {
+	        		questionRepository.save(question);
+	        	}
+	        		
 	        }
 	    } catch (IOException e) {
 	       System.err.println("Failure to load form questions");

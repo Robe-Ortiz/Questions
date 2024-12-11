@@ -13,8 +13,8 @@ public class TrueOrFalseQuestion extends Question{
 
 	public TrueOrFalseQuestion() {}
 	
-	public TrueOrFalseQuestion(Long id, String question, CategoryOfQuestion category, Boolean answer) {
-		super(id, question, category);
+	public TrueOrFalseQuestion(String question, CategoryOfQuestion category, Boolean answer) {
+		super(question, category);
 		this.answer = answer;
 	}
 

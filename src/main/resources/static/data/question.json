@@ -1,76 +1,65 @@
 [
   {
-    "id": 1,
-    "question": "En!!! Java, una clase puede extender múltiples clases a la vez.",
+    "question": "En Java, una clase puede extender múltiples clases a la vez.",
     "answer": false,
     "typeOfQuestion": "TRUE_OR_FALSE",
-    "category": "PROGRAMACION"
+    "category": "PROGRAMACIÓN"
   },
   {
-    "id": 2,
     "question": "El método 'main' es el punto de entrada de una aplicación Java.",
     "answer": true,
     "typeOfQuestion": "TRUE_OR_FALSE",
-    "category": "PROGRAMACION"
+    "category": "PROGRAMACIÓN"
   },
   {
-    "id": 3,
     "question": "En Java, se puede crear una instancia de una clase abstracta.",
     "answer": false,
     "typeOfQuestion": "TRUE_OR_FALSE",
-    "category": "PROGRAMACION"
+    "category": "PROGRAMACIÓN"
   },
   {
-    "id": 4,
     "question": "Los métodos estáticos pueden acceder a miembros no estáticos de una clase en Java.",
     "answer": false,
     "typeOfQuestion": "TRUE_OR_FALSE",
-    "category": "PROGRAMACION"
+    "category": "PROGRAMACIÓN"
   },
   {
-    "id": 5,
     "question": "En Java, el tipo de datos 'int' puede almacenar valores decimales.",
     "answer": false,
     "typeOfQuestion": "TRUE_OR_FALSE",
-    "category": "PROGRAMACION"
+    "category": "PROGRAMACIÓN"
   },
   {
-    "id": 6,
     "question": "Una interfaz en Java puede tener métodos con implementación.",
     "answer": true,
     "typeOfQuestion": "TRUE_OR_FALSE",
-    "category": "PROGRAMACION"
+    "category": "PROGRAMACIÓN"
   },
   {
-    "id": 7,
     "question": "Los objetos en Java siempre se pasan por valor.",
     "answer": true,
     "typeOfQuestion": "TRUE_OR_FALSE",
-    "category": "PROGRAMACION"
+    "category": "PROGRAMACIÓN"
   },
   {
-    "id": 8,
     "question": "Java permite la sobrecarga de operadores como en otros lenguajes como C++.",
     "answer": false,
     "typeOfQuestion": "TRUE_OR_FALSE",
-    "category": "PROGRAMACION"
+    "category": "PROGRAMACIÓN"
   },
   {
-    "id": 9,
     "question": "En Java, una variable de tipo 'String' es inmutable.",
     "answer": true,
     "typeOfQuestion": "TRUE_OR_FALSE",
-    "category": "PROGRAMACION"
+    "category": "PROGRAMACIÓN"
   },
   {
-    "id": 10,
     "question": "El uso de 'final' en Java implica que la variable o método no se puede modificar.",
     "answer": true,
     "typeOfQuestion": "TRUE_OR_FALSE",
-    "category": "PROGRAMACION"
+    "category": "PROGRAMACIÓN"
   },
   {
-      "id": 11,
       "question": "¿Cuál de las siguientes afirmaciones sobre las interfaces en Java es falsa?",
       "incorrectAnswers": [
         "Una interfaz puede contener métodos con implementación.",
@@ -79,10 +68,9 @@
       ],
       "correctAnswers": ["Una interfaz puede tener atributos."],
       "typeOfQuestion": "MULTIPLE_QUESTION",
-      "category": "PROGRAMACION"
+      "category": "PROGRAMACIÓN"
     },
     {
-      "id": 12,
       "question": "¿Qué palabra clave se utiliza para heredar una clase en Java?",
       "incorrectAnswers": [
         "implements",
@@ -91,10 +79,9 @@
       ],
       "correctAnswers": ["extends"],
       "typeOfQuestion": "MULTIPLE_QUESTION",
-      "category": "PROGRAMACION"
+      "category": "PROGRAMACIÓN"
     },
     {
-      "id": 13,
       "question": "¿Cuál de las siguientes afirmaciones sobre los constructores es verdadera?",
       "incorrectAnswers": [
         "Un constructor puede ser estático.",
@@ -106,10 +93,9 @@
         "Un constructor puede ser sobrecargado."
       ],
       "typeOfQuestion": "MULTIPLE_QUESTION",
-      "category": "PROGRAMACION"
+      "category": "PROGRAMACIÓN"
     },
     {
-      "id": 14,
       "question": "¿Qué excepción se lanza cuando intentas acceder a un índice inexistente en un arreglo?",
       "incorrectAnswers": [
         "NullPointerException",
@@ -119,10 +105,9 @@
       ],
       "correctAnswers": ["ArrayIndexOutOfBoundsException"],
       "typeOfQuestion": "MULTIPLE_QUESTION",
-      "category": "PROGRAMACION"
+      "category": "PROGRAMACIÓN"
     },
     {
-      "id": 15,
       "question": "¿Cuál de las siguientes palabras clave se utiliza para definir una constante en Java?",
       "incorrectAnswers": [
         "finalize",
@@ -134,6 +119,108 @@
         "static final"
       ],
       "typeOfQuestion": "MULTIPLE_QUESTION",
-      "category": "PROGRAMACION"
-    }
+      "category": "PROGRAMACIÓN"
+    },
+	{
+	  "question": "¿Cuál de las siguientes opciones corresponde a una provincia de España?",
+	  "incorrectAnswers": [
+	    "Gran Canaria",
+	    "Fuenlabrada",
+	    "Alcorcón",
+	    "San Fernando",
+	    "Benidorm",
+	    "Elda",
+	    "Torrevieja",
+	    "Algeciras",
+	    "Jerez de la Frontera",
+	    "Barbate",
+	    "Alcoy",
+	    "Mérida",
+	    "Telde",
+	    "Arganda del Rey",
+	    "Parla",
+	    "Majadahonda",
+	    "Villaviciosa de Odón",
+	    "Aranda de Duero",
+	    "Móstoles",
+	    "Sanlúcar de Barrameda",
+	    "Motril",
+	    "Estepona",
+	    "Marbella",
+	    "Ronda",
+	    "Torrox",
+	    "Antequera",
+	    "Águilas",
+	    "Lorca",
+	    "Ponferrada",
+	    "Ribadeo",
+	    "Oropesa",
+	    "San Vicente del Raspeig",
+	    "Villarreal",
+	    "Manresa",
+	    "Vilafranca del Penedès",
+	    "Calella",
+	    "Blanes",
+	    "San Sebastián de los Reyes",
+	    "Tres Cantos",
+	    "Pozuelo de Alarcón",
+	    "Santiago de Compostela",
+	    "Cullera",
+	    "Denia"
+	  ],
+	  "correctAnswers": [
+	    "Álava",
+	    "Albacete",
+	    "Alicante",
+	    "Almería",
+	    "Asturias",
+	    "Ávila",
+	    "Badajoz",
+	    "Barcelona",
+	    "Burgos",
+	    "Cáceres",
+	    "Cádiz",
+	    "Cantabria",
+	    "Castellón",
+	    "Ciudad Real",
+	    "Córdoba",
+	    "Cuenca",
+	    "Gerona",
+	    "Granada",
+	    "Guadalajara",
+	    "Guipúzcoa",
+	    "Huelva",
+	    "Huesca",
+	    "Islas Baleares",
+	    "Jaén",
+	    "La Coruña",
+	    "La Rioja",
+	    "Las Palmas",
+	    "León",
+	    "Lérida",
+	    "Lugo",
+	    "Madrid",
+	    "Málaga",
+	    "Murcia",
+	    "Navarra",
+	    "Orense",
+	    "Palencia",
+	    "Pontevedra",
+	    "Salamanca",
+	    "Santa Cruz de Tenerife",
+	    "Segovia",
+	    "Sevilla",
+	    "Soria",
+	    "Tarragona",
+	    "Teruel",
+	    "Toledo",
+	    "Valencia",
+	    "Valladolid",
+	    "Vizcaya",
+	    "Zamora",
+	    "Zaragoza"
+	  ],
+	  "typeOfQuestion": "MULTIPLE_QUESTION",
+	  "category": "GEOGRAFÍA"
+	}
 ]

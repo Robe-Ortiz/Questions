@@ -23,8 +23,8 @@ public class MultipleQuestion extends Question {
     
     public MultipleQuestion() {}
                
-	public MultipleQuestion(Long id, String question, CategoryOfQuestion category, List<String> incorrectAnswers, List<String> correctAnswer) {
-		super(id, question, category);
+	public MultipleQuestion(String question, CategoryOfQuestion category, List<String> incorrectAnswers, List<String> correctAnswer) {
+		super(question, category);
 		this.incorrectAnswers = incorrectAnswers;
 		this.correctAnswers = correctAnswer;
 	}
