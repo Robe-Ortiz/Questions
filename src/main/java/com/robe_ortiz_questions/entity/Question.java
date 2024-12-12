@@ -1,6 +1,5 @@
 package com.robe_ortiz_questions.entity;
 
-import jakarta.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import jakarta.persistence.Column;

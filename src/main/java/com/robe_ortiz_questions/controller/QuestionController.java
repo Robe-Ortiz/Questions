@@ -11,10 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import com.robe_ortiz_questions.entity.CategoryOfQuestion;
 import com.robe_ortiz_questions.entity.Question;
-import com.robe_ortiz_questions.entity.TypeOfQuestion;
 import com.robe_ortiz_questions.service.QuestionService;
 
 @Controller
@@ -28,6 +26,52 @@ public class QuestionController {
 	public String showAllQuestions(Model model) {		
 		model.addAttribute("questions",questionService.getAllQuestions());
 		return "questions";
+	}
+	
+	@GetMapping("/new")
+	public String addQuestion(Model model, 
+	                          @RequestParam(required = false) String stage, 
+	                          @RequestParam(required = false) String QuestionType) {
+	    String currentStage = (stage == null) ? "first" : stage;
+	    model.addAttribute("stage", currentStage);
+	    if ("second".equals(currentStage)) {
+	        model.addAttribute("QuestionType", QuestionType);
+	    }
+	    return "question-add";
+	}
+
+	@PostMapping("/new")
+	public String procesarFormulario(@RequestParam String QuestionType, RedirectAttributes redirectAttributes) {
+	    if (!"MULTIPLE_QUESTION".equals(QuestionType) && !"TRUE_OR_FALSE".equals(QuestionType)) {
+	        return "redirect:/question/new";
+	    }
+	    redirectAttributes.addAttribute("stage", "second");
+	    redirectAttributes.addAttribute("QuestionType", QuestionType);
+	    return "redirect:/question/new";
+	}
+	
+	@PostMapping("/save")
+	public String saveQuestion(@RequestParam String question, 
+	                           @RequestParam(required = false) String correctAnswers,
+	                           @RequestParam(required = false) String incorrectAnswers,
+	                           @RequestParam(required = false) String answer,
+	                           @RequestParam String QuestionType,
+	                           RedirectAttributes redirectAttributes) {
+	    try {
+	        if ("MULTIPLE_QUESTION".equals(QuestionType)) {
+	            // Lógica para guardar una pregunta de opción múltiple
+	            saveMultipleQuestion(question, correctAnswers, incorrectAnswers);
+	        } else if ("TRUE_OR_FALSE".equals(QuestionType)) {
+	            // Lógica para guardar una pregunta de verdadero o falso
+	            saveTrueOrFalseQuestion(question, Boolean.parseBoolean(answer));
+	        } else {
+	            throw new IllegalArgumentException("Tipo de pregunta no válido");
+	        }
+	        redirectAttributes.addFlashAttribute("success", "Pregunta guardada con éxito");
+	    } catch (Exception e) {
+	        redirectAttributes.addFlashAttribute("error", "Error al guardar la pregunta: " + e.getMessage());
+	    }
+	    return "redirect:/question/new";
 	}
 	
 	

@@ -31,15 +31,14 @@
 				<div>
 
 					<div th:if="${question.tipoDePregunta.name() == 'TRUE_OR_FALSE'}">
-					<table class="table table-striped table-bordered">
+						<table class="table table-striped table-bordered">
 							<thead>
 								<tr>
 									<th>Respuesta Correcta</th>
 								</tr>
 							</thead>
 							<tbody>
-								
-									<td	th:text="${question.answer ? 'Verdadero' : 'Falso'}"></td>
+								<td th:text="${question.answer ? 'Verdadero' : 'Falso'}"></td>
 								</tr>
 							</tbody>
 						</table>
@@ -83,8 +82,9 @@
 		</div>
 		<p th:if="${question == null}">No hay ninguna pregunta disponible
 			con ese ID.</p>
-			
-			<a th:href="@{/question/all}" class="mb-5 btn btn-light fw-bold">Volver a la lista principal</a>
+
+		<a th:href="@{/question/all}" class="mb-5 btn btn-light fw-bold">Volver
+			a la lista principal</a>
 	</main>
 
 	<div th:replace="~{fragments/scripts :: scripts}"></div>
