@@ -5,7 +5,7 @@ import java.util.List;
 public class QuestionFactory {
 
     @SuppressWarnings("unchecked")
-    public static Question createQuestion(Long id, TypeOfQuestion typeOfQuestion, CategoryOfQuestion category, String question, Object... extraParams) throws IllegalArgumentException {
+    public static Question createQuestion(TypeOfQuestion typeOfQuestion, CategoryOfQuestion category, String question, Object... extraParams) throws IllegalArgumentException {
         switch (typeOfQuestion) {
             case TRUE_OR_FALSE:
                 if (extraParams.length != 1 || !(extraParams[0] instanceof Boolean)) {

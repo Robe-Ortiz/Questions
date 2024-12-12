@@ -33,6 +33,10 @@ public class QuestionService {
  	public List<Question> getAllByCategory(CategoryOfQuestion category) {
  	    return questionRepository.findByCategoryOrderByIdAsc(category);
  	}
+ 	
+ 	public void saveQuestion(Question question) {
+ 		questionRepository.save(question);
+ 	}
 
 	public void processQuestionsFromTheServerFile(String classPath) {
 		ObjectMapper objectMapper = new ObjectMapper();
