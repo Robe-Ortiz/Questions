@@ -1,4 +1,4 @@
-package com.robe_ortiz_questions.entity;
+package com.robe_ortiz_questions.entity.question;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

@@ -1,4 +1,4 @@
-package com.robe_ortiz_questions.entity;
+package com.robe_ortiz_questions.entity.question;
 
 public enum TypeOfQuestion {
     TRUE_OR_FALSE("Verdadero o falso"),

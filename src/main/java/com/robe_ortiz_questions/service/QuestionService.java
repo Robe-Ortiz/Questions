@@ -8,8 +8,8 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.robe_ortiz_questions.entity.CategoryOfQuestion;
-import com.robe_ortiz_questions.entity.Question;
+import com.robe_ortiz_questions.entity.question.CategoryOfQuestion;
+import com.robe_ortiz_questions.entity.question.Question;
 import com.robe_ortiz_questions.repository.QuestionRepository;
 
 @Service

@@ -1,4 +1,4 @@
-package com.robe_ortiz_questions.entity;
+package com.robe_ortiz_questions.entity.question;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
