@@ -10,18 +10,17 @@
         <!-- Navigation -->
         <ul class="navbar-nav">
             <li class="nav-item active"><a class="nav-link" th:href="@{/}">Home</a></li>
+            <li class="nav-item active"><a class="nav-link" th:href="@{/question/all}">Questions</a></li>
             <li class="nav-item active"><a class="nav-link" th:if="${user == null}" th:href="@{/oauth2/authorization/google}">Login</a></li>
-            <li class="nav-item dropdown"><a
+            <li class="nav-item dropdown" ><a
                 class="nav-link dropdown-toggle" href="#" id="questionsDropdown"
                 role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Questions </a>
+                    Administration </a>
                 <ul class="dropdown-menu" aria-labelledby="questionsDropdown">
-                    <li><a class="dropdown-item" th:href="@{/question/all}">View All Questions</a></li>
-                    <li><hr class="dropdown-divider"></li>
                     <li><a class="dropdown-item" th:href="@{/question/new}">Add New Question</a></li>
                     <li><a class="dropdown-item" th:href="@{/question/new/question-file}">Add Question File</a></li>
                     <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" th:href="@{/question/stats}">Question Statistics</a></li>
+                    <li><a class="dropdown-item" th:href="@{/}">Question Statistics</a></li>
                 </ul>
             </li>
         </ul>

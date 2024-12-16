@@ -16,7 +16,7 @@ public class User {
     private String email;
     private String name;
     @Enumerated(EnumType.STRING)
-    private UserRole userRole = UserRole.USER;
+    private UserRole userRole = UserRole.ROLE_USER;
 	
     public User() {
 	}
