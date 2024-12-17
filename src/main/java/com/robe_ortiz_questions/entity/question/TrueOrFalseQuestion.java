@@ -27,7 +27,7 @@ public class TrueOrFalseQuestion extends Question{
 	}
 
 	@Override
-	public TypeOfQuestion getTipoDePregunta() {
+	public TypeOfQuestion getTypeOfQuestion() {
 		return TypeOfQuestion.TRUE_OR_FALSE;
 	}   	
 }

@@ -66,5 +66,5 @@ public abstract class Question {
 		this.category = category;
 	}
 
-	public abstract TypeOfQuestion getTipoDePregunta();
+	public abstract TypeOfQuestion getTypeOfQuestion();
 }

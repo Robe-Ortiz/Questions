@@ -46,7 +46,7 @@ public class MultipleQuestion extends Question {
 	}
 
 	@Override
-	public TypeOfQuestion getTipoDePregunta() {
+	public TypeOfQuestion getTypeOfQuestion() {
 		return TypeOfQuestion.MULTIPLE_QUESTION;
 	} 
 }

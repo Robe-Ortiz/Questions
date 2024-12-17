@@ -22,14 +22,14 @@
 						<td th:text="${question.id}"></td>
 						<td th:text="${question.question}"></td>
 						<td th:text="${question.category}"></td>
-						<td th:text="${question.tipoDePregunta.translate}"></td>
+						<td th:text="${question.typeOfQuestion.translate}"></td>
 					</tr>
 				</tbody>
 			</table>
 			<div>
 				<div>
 
-					<div th:if="${question.tipoDePregunta.name() == 'TRUE_OR_FALSE'}">
+					<div th:if="${question.typeOfQuestion.name() == 'TRUE_OR_FALSE'}">
 						<table class="table table-striped table-bordered">
 							<thead>
 								<tr>
@@ -45,7 +45,7 @@
 					</div>
 
 					<div
-						th:if="${question.tipoDePregunta.name() == 'MULTIPLE_QUESTION'}">
+						th:if="${question.typeOfQuestion.name() == 'MULTIPLE_QUESTION'}">
 						<table class="mb-5 table table-striped table-bordered">
 							<thead>
 								<tr>
