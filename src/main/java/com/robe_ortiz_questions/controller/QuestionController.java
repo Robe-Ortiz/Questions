@@ -3,6 +3,7 @@ package com.robe_ortiz_questions.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.orm.jpa.JpaSystemException;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -31,8 +32,20 @@ public class QuestionController {
 	private QuestionService questionService;
 	
 	@GetMapping("/all")
-	public String showAllQuestions(Model model) {
-		model.addAttribute("questions", questionService.getAllQuestions());
+	public String showAllQuestions(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size,
+								   @RequestParam(required = false) CategoryOfQuestion category,Model model) {
+	    Page<Question> questionPage;
+	    if (category != null) {
+	        questionPage = questionService.getAllQuestionsPageables(category, page, size);
+	        model.addAttribute("category", category.toString());
+	    } else {
+	        questionPage = questionService.getAllQuestionsPageables(page, size);
+	        model.addAttribute("category", "");
+	    }
+		model.addAttribute("questions", questionPage.getContent());
+		model.addAttribute("currentPage", page);
+		model.addAttribute("totalPages", questionPage.getTotalPages());
+		model.addAttribute("pageNumbers", questionService.getNumbersOfPages(questionPage));		
 		return "questions";
 	}
 
@@ -106,13 +119,6 @@ public class QuestionController {
 		return "question-info";
 	}
 
-	@GetMapping("/category/{category}")
-	public String showAllQuestionsByTypeOfQuestion(@PathVariable CategoryOfQuestion category, Model model) {
-		model.addAttribute("questions", questionService.getAllByCategory(category));
-		model.addAttribute("activateBackButton", true);
-		return "questions";
-	}
-
 	@GetMapping("/cargar/{fileName}")
 	public String processQuestionsFromTheServerFile(@PathVariable("fileName") String fileName, Model model) {
 		try {
@@ -121,7 +127,7 @@ public class QuestionController {
 			System.err.println("Failure to load server file questions");
 			e.printStackTrace();
 		}
-		model.addAttribute("questions", questionService.getAllQuestions());
+		model.addAttribute("questions", questionService.getAllQuestionsPageables());
 		return "redirect:/question/all";
 	}
 
@@ -135,7 +141,7 @@ public class QuestionController {
 		try {
 			String jsonContent = new String(file.getBytes());
 			questionService.processQuestionsFromTheFormFile(jsonContent);
-			model.addAttribute("questions", questionService.getAllQuestions());
+			model.addAttribute("questions", questionService.getAllQuestionsPageables());
 			return "questions";
 		} catch (Exception e) {
 			e.printStackTrace();

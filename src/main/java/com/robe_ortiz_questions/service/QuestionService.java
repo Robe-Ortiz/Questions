@@ -3,8 +3,13 @@ package com.robe_ortiz_questions.service;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -26,12 +31,25 @@ public class QuestionService {
 		return questionRepository.findById(id).orElse(null);
 	}
 	
- 	public List<Question> getAllQuestions() {
-		return questionRepository.findAll(Sort.by(Sort.Direction.ASC, "id"));
-	}
+ 	public Page<Question> getAllQuestionsPageables(){
+ 		PageRequest pageable = PageRequest.of(0, 10, Sort.by(Sort.Order.asc("id")));
+ 		return questionRepository.findAll(pageable);
+ 	}
  	
- 	public List<Question> getAllByCategory(CategoryOfQuestion category) {
- 	    return questionRepository.findByCategoryOrderByIdAsc(category);
+ 	public Page<Question> getAllQuestionsPageables(int page, int size){
+ 		PageRequest pageable = PageRequest.of(page, size, Sort.by(Sort.Order.asc("id")));
+ 		return questionRepository.findAll(pageable);
+ 	}
+ 	 	
+ 	public Page<Question> getAllQuestionsPageables(CategoryOfQuestion category, int page, int size) {
+ 		PageRequest pageable = PageRequest.of(page, size);
+ 		return questionRepository.findByCategoryOrderByIdAsc(category, pageable);
+ 	}
+ 	
+ 	public List<Integer> getNumbersOfPages(Page<Question> questionPage){
+ 		return IntStream.range(0, questionPage.getTotalPages())
+ 				.boxed()
+ 				.collect(Collectors.toList());
  	}
  	
  	public void saveQuestion(Question question) {

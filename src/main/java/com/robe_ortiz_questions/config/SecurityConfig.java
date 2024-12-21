@@ -17,7 +17,7 @@ public class SecurityConfig {
         return httpSecurity.authorizeHttpRequests(request -> {
                 request.requestMatchers("/css/**", "/img/**","/js/**").permitAll();
                 request.requestMatchers(HttpMethod.GET, "/", "/question/all", "/question/id/*", "/question/category/**").permitAll();
-                request.requestMatchers("/question/new", "/question/new/question-file", "/question/borrar", "/question/cargar/**").hasAuthority("ROLE_ADMIN");
+                request.requestMatchers("/question/new", "/question/new/question-file", "/question/borrar", "/question/cargar/**").hasAuthority("ADMIN");
                 request.anyRequest().authenticated();
             })
             .oauth2Login(oauth2 -> oauth2.userInfoEndpoint(userInfo -> 

@@ -35,7 +35,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 	        userRepository.save(user);
 	    }
 	   
-	    SimpleGrantedAuthority authority = new SimpleGrantedAuthority("ROLE_" + user.getUserRole().name());
+	    SimpleGrantedAuthority authority = new SimpleGrantedAuthority(user.getUserRole().name());
 	    
 	    System.out.println("Authorities: " + authority);
 
