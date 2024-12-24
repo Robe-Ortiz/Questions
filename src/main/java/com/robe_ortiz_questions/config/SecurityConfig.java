@@ -16,10 +16,11 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity, CustomOAuth2UserService customOAuth2UserService) throws Exception {
         return httpSecurity.authorizeHttpRequests(request -> {
                 request.requestMatchers("/css/**", "/img/**","/js/**").permitAll();
+                request.requestMatchers("/api/**").permitAll();
                 request.requestMatchers("/game/**").authenticated();
                 request.requestMatchers(HttpMethod.GET, "/", "/question/all", "/question/id/*", "/question/category/**").permitAll();                
 
-                request.requestMatchers("/question/new", "/question/new/question-file", "/question/borrar", "/question/cargar/**").hasAuthority("ADMIN");
+                request.requestMatchers("/question/new", "/question/new/question-file", "/question/delete/all", "/question/load/**").hasAuthority("ADMIN");
                 request.anyRequest().authenticated();
             })
             .oauth2Login(oauth2 -> oauth2.userInfoEndpoint(userInfo -> 
@@ -42,6 +43,7 @@ public class SecurityConfig {
             .csrf(csrf -> csrf //Tendría que evitar esto y hacer que todo incluya el certificado csrf
                     .ignoringRequestMatchers("/logout")
                     .ignoringRequestMatchers("/game/**")
+                    .ignoringRequestMatchers("/api/**")
             		)
             .build();
     }    

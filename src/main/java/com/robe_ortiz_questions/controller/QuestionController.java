@@ -104,9 +104,9 @@ public class QuestionController {
 		return "redirect:/question/all";
 	}
 
-	@GetMapping("/borrar")
+	@GetMapping("/delete/all")
 	public String cargar(RedirectAttributes redirectAttributes) {
-		questionService.borrarTodo();
+		questionService.deleteAll();
 		redirectAttributes.addFlashAttribute("success", "All questions have been deleted.");
 		return "redirect:/question/all";
 	}
@@ -119,7 +119,7 @@ public class QuestionController {
 		return "question-info";
 	}
 
-	@GetMapping("/cargar/{fileName}")
+	@GetMapping("/load/{fileName}")
 	public String processQuestionsFromTheServerFile(@PathVariable("fileName") String fileName, Model model) {
 		try {
 			questionService.processQuestionsFromTheServerFile("static/data/" + fileName + ".json");

@@ -23,12 +23,24 @@ public class QuestionService {
 	@Autowired
 	private QuestionRepository questionRepository;
 
-	public void borrarTodo() {
+	public void deleteAll() {
 		questionRepository.deleteAll();
+	}
+	
+	public List<Question> findAllQuestions(){
+		return questionRepository.findAll();
 	}
 		
 	public Question getQuestionById(long id) {
 		return questionRepository.findById(id).orElse(null);
+	}
+	
+	public void deleteById(Long id) {
+		questionRepository.deleteById(id);		
+	}
+	
+	public Question save(Question question) {
+		return questionRepository.save(question);
 	}
 	
  	public Page<Question> getAllQuestionsPageables(){
@@ -92,6 +104,10 @@ public class QuestionService {
 	       e.printStackTrace();
 	    }
 	}
+
+
+
+
 
 	
 

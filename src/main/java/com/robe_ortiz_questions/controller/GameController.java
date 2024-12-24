@@ -73,7 +73,7 @@ public class GameController {
         if (currentQuestionIndex < questions.size()) {
             return showQuestion(model);
         } else {
-            return showResults(model);
+        	 return "redirect:/game/result";
         }
     }
 
@@ -102,7 +102,8 @@ public class GameController {
         return "game";
     }
 
-    private String showResults(Model model) {
+    @GetMapping("/result")
+    public String showResults(Model model) {
     	model.addAttribute("showResult",true);
         model.addAttribute("correctAnswers", model.getAttribute("correctAnswers"));
         model.addAttribute("wrongAnswers", model.getAttribute("wrongAnswers"));

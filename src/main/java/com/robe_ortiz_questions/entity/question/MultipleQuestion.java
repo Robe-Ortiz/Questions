@@ -2,6 +2,8 @@ package com.robe_ortiz_questions.entity.question;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CollectionTable;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
@@ -44,6 +46,7 @@ public class MultipleQuestion extends Question {
 		this.correctAnswers = correctAnswers;
 	}
 
+	@JsonIgnore
 	@Override
 	public TypeOfQuestion getTypeOfQuestion() {
 		return TypeOfQuestion.MULTIPLE_QUESTION;

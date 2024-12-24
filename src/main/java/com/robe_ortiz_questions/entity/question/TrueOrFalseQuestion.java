@@ -1,5 +1,7 @@
 package com.robe_ortiz_questions.entity.question;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
@@ -26,6 +28,7 @@ public class TrueOrFalseQuestion extends Question{
 		this.answer = answer;
 	}
 
+	@JsonIgnore
 	@Override
 	public TypeOfQuestion getTypeOfQuestion() {
 		return TypeOfQuestion.TRUE_OR_FALSE;
