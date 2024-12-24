@@ -14,6 +14,8 @@ import com.robe_ortiz_questions.entity.question.Question;
 public interface QuestionRepository extends JpaRepository<Question, Long>{
 	
 	Page<Question> findByCategoryOrderByIdAsc(CategoryOfQuestion category, Pageable pageable);
+	
+	List<Question> findByCategory(CategoryOfQuestion category);
 	 
-	 boolean existsByQuestion(String question);
+	boolean existsByQuestion(String question);
 }

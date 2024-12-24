@@ -16,7 +16,9 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity, CustomOAuth2UserService customOAuth2UserService) throws Exception {
         return httpSecurity.authorizeHttpRequests(request -> {
                 request.requestMatchers("/css/**", "/img/**","/js/**").permitAll();
-                request.requestMatchers(HttpMethod.GET, "/", "/question/all", "/question/id/*", "/question/category/**").permitAll();
+                request.requestMatchers("/game/**").authenticated();
+                request.requestMatchers(HttpMethod.GET, "/", "/question/all", "/question/id/*", "/question/category/**").permitAll();                
+
                 request.requestMatchers("/question/new", "/question/new/question-file", "/question/borrar", "/question/cargar/**").hasAuthority("ADMIN");
                 request.anyRequest().authenticated();
             })
@@ -37,8 +39,9 @@ public class SecurityConfig {
             	        response.getWriter().write("Acceso denegado. No tienes permisos para esta acción.");
             	    })
         	)
-            .csrf(csrf -> csrf
-                    .ignoringRequestMatchers("/logout") //Tendría que evitar esto y hacer que la función js logout() incluya el certificado csrf
+            .csrf(csrf -> csrf //Tendría que evitar esto y hacer que todo incluya el certificado csrf
+                    .ignoringRequestMatchers("/logout")
+                    .ignoringRequestMatchers("/game/**")
             		)
             .build();
     }    

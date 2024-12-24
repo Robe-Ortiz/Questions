@@ -25,3 +25,12 @@ body {
     width: 100%;
     overflow: hidden; 
 }
+
+.form-check-input:checked {
+    background-color: #fcba03; 
+    border-color: yellow; 
+}
+
+.form-check-input:hover {
+    background-color: #ffcc00; 
+}
