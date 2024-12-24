@@ -83,7 +83,14 @@
 			con ese ID.</p>
 
 		<a th:href="@{/question/all}" class="mb-5 btn btn-light fw-bold">Volver
-			a la lista principal</a>
+			a la lista principal</a> <a
+			th:href="@{/question/edit/{id}(id=${question.id})}"
+			class="mb-5 btn btn-warning fw-bold">Modificar Información</a>
+		<form th:action="@{/question/delete/{id}(id=${question.id})}"
+			method="post" class="d-inline">
+			<button type="submit" class="mb-5 btn btn-danger fw-bold">Eliminar
+				Pregunta</button>
+		</form>
 	</main>
 
 	<div th:replace="~{fragments/scripts :: scripts}"></div>

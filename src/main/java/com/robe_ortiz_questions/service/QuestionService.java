@@ -14,7 +14,9 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.robe_ortiz_questions.entity.question.CategoryOfQuestion;
+import com.robe_ortiz_questions.entity.question.MultipleQuestion;
 import com.robe_ortiz_questions.entity.question.Question;
+import com.robe_ortiz_questions.entity.question.TrueOrFalseQuestion;
 import com.robe_ortiz_questions.repository.QuestionRepository;
 
 @Service
@@ -23,6 +25,23 @@ public class QuestionService {
 	@Autowired
 	private QuestionRepository questionRepository;
 
+    public void updateQuestion(Long id, Question updatedQuestion) {
+        Question existingQuestion = questionRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Pregunta no encontrada con ID: " + id));
+
+        existingQuestion.setQuestion(updatedQuestion.getQuestion());
+        existingQuestion.setCategory(updatedQuestion.getCategory());
+
+        if (existingQuestion instanceof TrueOrFalseQuestion && updatedQuestion instanceof TrueOrFalseQuestion) {
+            ((TrueOrFalseQuestion) existingQuestion).setAnswer(((TrueOrFalseQuestion) updatedQuestion).getAnswer());
+        } else if (existingQuestion instanceof MultipleQuestion && updatedQuestion instanceof MultipleQuestion) {
+            ((MultipleQuestion) existingQuestion).setCorrectAnswers(((MultipleQuestion) updatedQuestion).getCorrectAnswers());
+            ((MultipleQuestion) existingQuestion).setIncorrectAnswers(((MultipleQuestion) updatedQuestion).getIncorrectAnswers());
+        }
+
+        questionRepository.save(existingQuestion);
+    }
+	
 	public void deleteAll() {
 		questionRepository.deleteAll();
 	}

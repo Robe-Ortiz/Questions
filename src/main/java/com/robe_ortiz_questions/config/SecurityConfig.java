@@ -20,7 +20,7 @@ public class SecurityConfig {
                 request.requestMatchers("/game/**").authenticated();
                 request.requestMatchers(HttpMethod.GET, "/", "/question/all", "/question/id/*", "/question/category/**").permitAll();                
 
-                request.requestMatchers("/question/new", "/question/new/question-file", "/question/delete/all", "/question/load/**").hasAuthority("ADMIN");
+                request.requestMatchers("/question/new", "/question/new/question-file","/question/edit/**", "/question/delete/**", "/question/load/**").hasAuthority("ADMIN");
                 request.anyRequest().authenticated();
             })
             .oauth2Login(oauth2 -> oauth2.userInfoEndpoint(userInfo -> 
