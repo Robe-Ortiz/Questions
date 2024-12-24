@@ -17,13 +17,36 @@ body {
 	color: white;
 }
 
-.error-404 {
-    background: url("/img/404.webp");
+.error {
+    background-image: url('/img/403.jpg'); 
     background-size: cover; 
-    background-position: center; 
+    background-position: center center; 
+    background-attachment: fixed; 
     height: 100vh; 
-    width: 100%;
-    overflow: hidden; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #ffc107; 
+    text-align: center;
+}
+
+.error-403{
+	background-image: url('/img/403.jpg');
+}
+
+.error-404{
+	background-image: url('/img/404.jpg');
+	justify-content: center;
+}
+
+.error-500{
+	background-image: url('/img/500.jpg');
+}
+
+
+.active #page-active{
+	background-color: #fcba03 !important; 
+	border-color: black; 
 }
 
 .form-check-input:checked {

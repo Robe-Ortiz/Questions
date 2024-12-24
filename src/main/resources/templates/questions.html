@@ -43,27 +43,34 @@
 			</tbody>
 		</table>
 
-		<nav aria-label="Page navigation" th:if="${!questions.isEmpty()}">
-			<ul class="pagination justify-content-center">
-				<li class="page-item" th:class="${currentPage == 0} ? 'disabled'">
-					<a class="page-link"
-					th:href="@{/question/all(page=${currentPage - 1}, size=${size}, category=${category})}"
-					tabindex="-1">Anterior</a>
-				</li>
-				<li class="page-item" th:each="i : ${pageNumbers}"
-					th:class="${i == currentPage} ? 'active'"><a class="page-link"
-					th:href="@{/question/all(page=${i}, size=${size}, category=${category})}"
-					th:text="${i + 1}"></a></li>
-				<li class="page-item"
-					th:class="${currentPage == totalPages - 1} ? 'disabled'"><a
-					class="page-link"
-					th:href="@{/question/all(page=${currentPage + 1}, size=${size}, category=${category})}">Siguiente</a>
-				</li>
-			</ul>
-		</nav>
+<nav aria-label="Page navigation" th:if="${!questions.isEmpty()}">
+    <ul class="pagination justify-content-center">
+        <!-- Botón 'Anterior' -->
+        <li class="page-item" th:class="${currentPage == 0} ? 'disabled'">
+            <a class="page-link text-black"
+               th:href="@{/question/all(page=${currentPage - 1}, size=${size}, category=${category})}"
+               tabindex="-1">Anterior</a>
+        </li>
+
+        <!-- Páginas numeradas -->
+        <li class="page-item" th:each="i : ${pageNumbers}"
+            th:class="${i == currentPage} ? 'active'">
+            <a  id="page-active" class="page-link text-black"
+               th:href="@{/question/all(page=${i}, size=${size}, category=${category})}"
+               th:text="${i + 1}"></a>
+        </li>
+
+        <!-- Botón 'Siguiente' -->
+        <li class="page-item" th:class="${currentPage == totalPages - 1} ? 'disabled'">
+            <a class="page-link text-black"
+               th:href="@{/question/all(page=${currentPage + 1}, size=${size}, category=${category})}">Siguiente</a>
+        </li>
+    </ul>
+</nav>
+
 
 		<p th:if="${activateBackButton}">
-			<a th:href="@{/question/all}" class="mb-5 btn btn-light fw-bold">Volver
+			<a th:href="@{/question/all}" class="mb-5 btn btn-warning fw-bold">Volver
 				a la lista principal</a>
 		</p>
 

@@ -34,12 +34,6 @@ public class SecurityConfig {
                     .clearAuthentication(true) 
                     .deleteCookies("JSESSIONID")
             )
-            .exceptionHandling(exception -> exception //provisional hasta crear página personalizada para error 403
-            	    .accessDeniedHandler((request, response, accessDeniedException) -> {
-            	        response.setStatus(HttpServletResponse.SC_FORBIDDEN);
-            	        response.getWriter().write("Acceso denegado. No tienes permisos para esta acción.");
-            	    })
-        	)
             .csrf(csrf -> csrf //Tendría que evitar esto y hacer que todo incluya el certificado csrf
                     .ignoringRequestMatchers("/logout")
                     .ignoringRequestMatchers("/game/**")
