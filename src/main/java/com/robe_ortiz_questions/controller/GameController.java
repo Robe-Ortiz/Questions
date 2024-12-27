@@ -3,6 +3,8 @@ package com.robe_ortiz_questions.controller;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,8 +27,12 @@ import com.robe_ortiz_questions.service.GameService;
 @SessionAttributes({"questions", "currentQuestionIndex", "correctAnswers", "wrongAnswers"})
 public class GameController {
 	
+	private static Random random = new Random();
+	
 	@Autowired
 	private GameService gameService;
+	
+
 
 	@GetMapping("/category")
 	public String selectCategory(Model model) {
@@ -42,40 +48,42 @@ public class GameController {
 		return "game-options";
 	}
 	
-    @PostMapping("/answer")
-    public String answer(@RequestParam("answer") String answer,
-                         @ModelAttribute("questions") List<Question> questions,
-                         @ModelAttribute("currentQuestionIndex") int currentQuestionIndex,
-                         @ModelAttribute("correctAnswers") int correctAnswers,
-                         @ModelAttribute("wrongAnswers") int wrongAnswers,
-                         Model model) {
-        Question currentQuestion = questions.get(currentQuestionIndex);
+	@PostMapping("/answer")
+	public String answer(@RequestParam("answer") List<String> answers,  // Recibir todas las respuestas seleccionadas
+	                     @ModelAttribute("questions") List<Question> questions,
+	                     @ModelAttribute("currentQuestionIndex") int currentQuestionIndex,
+	                     @ModelAttribute("correctAnswers") int correctAnswers,
+	                     @ModelAttribute("wrongAnswers") int wrongAnswers,
+	                     Model model) {
+	    Question currentQuestion = questions.get(currentQuestionIndex);
 
-        if (currentQuestion instanceof TrueOrFalseQuestion trueOrFalseQuestion) {
-            if (Boolean.parseBoolean(answer) == trueOrFalseQuestion.getAnswer()) {
-                correctAnswers++;
-            } else {
-                wrongAnswers++;
-            }
-        } else if (currentQuestion instanceof MultipleQuestion multipleQuestion) {
-            if (multipleQuestion.getCorrectAnswers().contains(answer)) {
-                correctAnswers++;
-            } else {
-                wrongAnswers++;
-            }
-        }
+	    if (currentQuestion instanceof TrueOrFalseQuestion trueOrFalseQuestion) {
+	        if (Boolean.parseBoolean(answers.get(0)) == trueOrFalseQuestion.getAnswer()) {
+	            correctAnswers++;
+	        } else {
+	            wrongAnswers++;
+	        }
+	    } else if (currentQuestion instanceof MultipleQuestion multipleQuestion) {
+	        List<String> correctAnswersList = multipleQuestion.getCorrectAnswers();
+	        
+	        if (correctAnswersList.containsAll(answers)) {
+	            correctAnswers++;
+	        } else {
+	            wrongAnswers++;
+	        }
+	    }
 
-        currentQuestionIndex++;
-        model.addAttribute("currentQuestionIndex", currentQuestionIndex);
-        model.addAttribute("correctAnswers", correctAnswers);
-        model.addAttribute("wrongAnswers", wrongAnswers);
+	    currentQuestionIndex++;
+	    model.addAttribute("currentQuestionIndex", currentQuestionIndex);
+	    model.addAttribute("correctAnswers", correctAnswers);
+	    model.addAttribute("wrongAnswers", wrongAnswers);
 
-        if (currentQuestionIndex < questions.size()) {
-            return showQuestion(model);
-        } else {
-        	 return "redirect:/game/result";
-        }
-    }
+	    if (currentQuestionIndex < questions.size()) {
+	        return showQuestion(model);
+	    } else {
+	        return "redirect:/game/result";
+	    }
+	}
 
     private String showQuestion(Model model) {
         List<Question> questions = (List<Question>) model.getAttribute("questions");
@@ -85,6 +93,8 @@ public class GameController {
         model.addAttribute("question", question);
 
         if (question instanceof MultipleQuestion multipleQuestion) {
+        	boolean showMultipleCorrectAnswers = false;
+
         	List<String> allAnswers = new ArrayList<>();      	           	    
     	    List<String> shuffledCorrectAnswers = new ArrayList<>(multipleQuestion.getCorrectAnswers());
     	    List<String> shuffledIncorrectAnswers = new ArrayList<>(multipleQuestion.getIncorrectAnswers());
@@ -92,15 +102,27 @@ public class GameController {
     	    Collections.shuffle(shuffledCorrectAnswers);
     	    Collections.shuffle(shuffledIncorrectAnswers);
     	    
-    	    allAnswers.add(shuffledCorrectAnswers.get(0));
-    	    allAnswers.addAll(shuffledIncorrectAnswers.subList(0, 3));    	    
+    	    if(shuffledCorrectAnswers.size() > 1) {
+    	    	showMultipleCorrectAnswers = random.nextBoolean();
+    	    }
+    	    	
+            if (showMultipleCorrectAnswers) {
+                allAnswers.addAll(shuffledCorrectAnswers.subList(0, 2));
+                allAnswers.addAll(shuffledIncorrectAnswers.subList(0, 2)); 
+            } else {
+                allAnswers.add(shuffledCorrectAnswers.get(0));
+                allAnswers.addAll(shuffledIncorrectAnswers.subList(0, 3)); 
+            }
+              	    
     	    
     	    Collections.shuffle(allAnswers);
     	    model.addAttribute("answers", allAnswers);
+    	    model.addAttribute("showMultipleCorrectAnswers", showMultipleCorrectAnswers);
         }
 
         return "game";
     }
+          
 
     @GetMapping("/result")
     public String showResults(Model model) {
@@ -115,7 +137,7 @@ public class GameController {
 		
 		try {		
 			List<Question> questions = gameService.getQuestions(Integer.parseInt(numberOfQuestions), CategoryOfQuestion.valueOf(category));
-			System.err.println(questions.size());
+			
 			if(questions.size() < Integer.parseInt(numberOfQuestions)) throw new IllegalArgumentException();
             model.addAttribute("questions", questions);
             model.addAttribute("currentQuestionIndex", 0);

@@ -34,16 +34,33 @@
 						</div>
 					</div>
 
-					<div th:if="${question.typeOfQuestion.name() == 'MULTIPLE_QUESTION'}">
-    <div class="row justify-content-center">
-        <div th:each="answer, iterStat : ${answers}" class="col-12 col-md-6 mb-3">
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="answer" th:id="${answer}" th:value="${answer}">
-                <label class="form-check-label fs-4" th:for="${answer}" th:text="${answer}"></label>
-            </div>
-        </div>
-    </div>
-</div>
+					<div
+						th:if="${question.typeOfQuestion.name() == 'MULTIPLE_QUESTION' and not showMultipleCorrectAnswers}">
+						<div class="row justify-content-center">
+							<div th:each="answer : ${answers}"
+								class="col-12 col-md-6 mb-3">
+								<div class="form-check">
+									<input class="form-check-input" type="radio" name="answer"
+										th:id="${answer}" th:value="${answer}"> <label
+										class="form-check-label fs-4" th:for="${answer}"
+										th:text="${answer}"></label>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div th:if="${question.typeOfQuestion.name() == 'MULTIPLE_QUESTION' and showMultipleCorrectAnswers}">
+					    <div class="row justify-content-center">
+					        <div th:each="answer : ${answers}" class="col-12 col-md-6 mb-3">
+					            <div class="form-check">
+					                <input class="form-check-input" type="checkbox" name="answer"
+					                    th:id="${answer}" th:value="${answer}"> 
+					                <label class="form-check-label fs-4" th:for="${answer}" th:text="${answer}"></label>
+					            </div>
+					        </div>
+					    </div>					    
+					</div>
+										
 
 					<div class="d-flex justify-content-center">
 						<button id="submitButton" type="submit"
@@ -52,6 +69,8 @@
 				</form>
 			</div>
 		</div>
+														<h4 th:if="${question.typeOfQuestion.name() == 'MULTIPLE_QUESTION' and showMultipleCorrectAnswers}" 
+					class="text-center text-warning mt-4">Dos respuestas correctas</h4>
 
 		<div th:replace="~{fragments/scripts :: scripts}"></div>
 		<script src="/js/quizFormValidation.js"></script>
