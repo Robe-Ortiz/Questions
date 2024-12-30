@@ -3,9 +3,14 @@ function logout() {
         title: '¿Estás seguro?',
         text: '¿Deseas cerrar sesión?',
         icon: 'warning',
+		iconColor: '#ffcc00',
         showCancelButton: true,
         confirmButtonText: 'Sí, cerrar sesión',
-        cancelButtonText: 'Cancelar'
+        cancelButtonText: 'Cancelar',
+        customClass: {
+            confirmButton: 'btn-confirm-logout', 
+            cancelButton: 'btn-cancel-logout'    
+        }
     }).then((result) => {
         if (result.isConfirmed) {     
             fetch('/logout', {
