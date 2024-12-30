@@ -11,8 +11,6 @@ import com.robe_ortiz_questions.entity.question.CategoryOfQuestion;
 import com.robe_ortiz_questions.entity.question.Question;
 import com.robe_ortiz_questions.repository.QuestionRepository;
 
-
-
 @Service
 public class GameService {
 

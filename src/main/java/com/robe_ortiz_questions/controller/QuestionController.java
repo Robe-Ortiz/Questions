@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.robe_ortiz_questions.entity.question.CategoryOfQuestion;
 import com.robe_ortiz_questions.entity.question.MultipleQuestion;
 import com.robe_ortiz_questions.entity.question.Question;
@@ -132,7 +133,6 @@ public class QuestionController {
 	
 	@GetMapping("/edit/{id}")
 	public String editQuestion(@PathVariable Long id, Model model) {
-	    // Obtiene la pregunta por ID
 	    Question question = questionService.getQuestionById(id);
 	    if (question == null) {
 	        throw new IllegalArgumentException("Pregunta no encontrada con ID: " + id);
@@ -142,7 +142,6 @@ public class QuestionController {
 	    model.addAttribute("questionText", question.getQuestion());
 	    model.addAttribute("categories", CategoryOfQuestion.values());
 
-	    // Verifica el tipo de la pregunta y agrega atributos específicos
 	    if (question instanceof TrueOrFalseQuestion) {
 	        model.addAttribute("isTrueOrFalse", true);
 	        model.addAttribute("questionType", TypeOfQuestion.TRUE_OR_FALSE);
@@ -202,15 +201,21 @@ public class QuestionController {
 	}
 
 	@PostMapping("/upload")
-	public String uploadQuestionFromTheFormFile(@RequestParam MultipartFile file, Model model) {
+	public String uploadQuestionFromTheFormFile(@RequestParam MultipartFile file, Model model, RedirectAttributes redirectAttributes) {
 		try {
 			String jsonContent = new String(file.getBytes());
+			
+			 ObjectMapper objectMapper = new ObjectMapper();
+		        objectMapper.readTree(jsonContent);
+		        
 			questionService.processQuestionsFromTheFormFile(jsonContent);
+			
 			model.addAttribute("questions", questionService.getAllQuestionsPageables());
-			return "questions";
+			redirectAttributes.addFlashAttribute("success", "Todo bien");
+			
+			return "redirect:/question/all";
 		} catch (Exception e) {
-			e.printStackTrace();
-			model.addAttribute("error", "Failed to process the file");
+			model.addAttribute("message", "Failed to process the file");
 			return "add-question-file";
 		}
 	}

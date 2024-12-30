@@ -54,7 +54,6 @@ public class GameController {
         List<Question> questions = game.getListOfQuestions();
         Question currentQuestion = questions.get(currentQuestionIndex);
 
-        // Lógica para verificar si la respuesta es correcta
         if (currentQuestion instanceof TrueOrFalseQuestion trueOrFalseQuestion) {
             if (Boolean.parseBoolean(answers.get(0)) == trueOrFalseQuestion.getAnswer()) {
                 game.incrementCorrectAnswers();
@@ -147,7 +146,7 @@ public class GameController {
 
         } catch (IllegalArgumentException e) {
             model.addAttribute("error", "Actualmente no podemos servir la configuración solicitada.");
-            return "game";
+            return "redirect:question/answer";
         }
     }
 }

@@ -4,11 +4,13 @@
 
 <body class="bg-dark questions">
 	<div th:replace="~{fragments/navbar :: navbar}"></div>
+	
+
 
 	<main class="container mt-5 text-center">
 		<h1 class="mb-5">Cargar archivo JSON de Preguntas</h1>
-		<h3 class="mb-5" th:text="${lastId == 0} ? 'Actualmente no hay preguntas, el primer ID debería ser el 1' 
-		: 'ID de la última pregunta de la base de datos: '+ ${lastId}"></h3>
+		
+		
 		<form method="post" action="/question/upload"
 			enctype="multipart/form-data">
 			<div>
@@ -17,7 +19,7 @@
 			</div>
 			<button class="mt-5 btn btn-light" type="submit">Subir</button>
 		</form>
-		<p th:if="${message}" th:text="${message}"></p>
+		<h2 th:if="${message}" th:text="${message}" class="text-danger mt-5"></h2>
 	</main>
 
 	<div th:replace="~{fragments/scripts :: scripts}"></div>

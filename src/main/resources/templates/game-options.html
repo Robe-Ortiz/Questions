@@ -5,10 +5,10 @@
 </head>
 <body class="bg-dark">
     <div th:replace="~{fragments/navbar :: navbar}"></div>
+    
     <div class="container text-center mt-5">
         <h1 class="text-white mb-5">Opciones de la partida</h1>
 
-        <!-- Formulario de selección de categoría -->
         <form action="/game/number-of-questions" method="get" class="mt-4" th:if="${showCategoryForm}">
             <h3 class="text-white">Selecciona una categoría</h3>
             <div class="d-flex flex-column align-items-center">
