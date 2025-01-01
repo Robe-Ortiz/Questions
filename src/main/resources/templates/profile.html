@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="es">
+<div th:replace="~{fragments/header :: head}"></div>
+<body class="bg-dark">
+	<div th:replace="~{fragments/navbar :: navbar}"></div>
+	
+	    <div class="profile-container">
+      <img th:src="@{${user.profilePicture}}" alt="Foto de perfil" class="profile-image">
+      <h1 class="text-white" th:text="${user.name}">User name</h1>
+    </div>
+	
+	<div th:replace="~{fragments/scripts :: scripts}"></div>
+	<script src="/js/snow.js"></script>
+</body>
+</html>

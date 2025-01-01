@@ -15,15 +15,17 @@ public class User {
     private Long id;
     private String email;
     private String name;
+    private String profilePicture;
     @Enumerated(EnumType.STRING)
     private UserRole userRole = UserRole.USER;
 	
     public User() {
 	}
 
-	public User(String email, String name) {
+	public User(String email, String name, String profilePicture) {
 		this.email = email;
 		this.name = name;
+		this.profilePicture = profilePicture;
 	}
 
 	public Long getId() {
@@ -37,6 +39,10 @@ public class User {
 	public String getEmail() {
 		return email;
 	}
+	
+	public String getProfilePicture() {
+		return profilePicture;
+	}
 
 	public void setEmail(String email) {
 		this.email = email;
@@ -48,6 +54,10 @@ public class User {
 
 	public void setName(String nombre) {
 		this.name = nombre;
+	}
+
+	public void setProfilePicture(String profilePicture) {
+		this.profilePicture = profilePicture;
 	}
 
 	public UserRole getUserRole() {

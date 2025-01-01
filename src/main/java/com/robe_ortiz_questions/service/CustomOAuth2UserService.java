@@ -25,14 +25,22 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 	public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
 	    OAuth2User oAuth2User = super.loadUser(userRequest);
 	    String email = oAuth2User.getAttribute("email");
-
+        String profilePicture = oAuth2User.getAttribute("picture");
+        
 	    User user = userRepository.findByEmail(email);
 
 	    if (user == null) {
 	        String name = oAuth2User.getAttribute("name");
-	        user = new User(email, name);
+	        user = new User(email, name,profilePicture);
 	        user.setUserRole(UserRole.USER);  
 	        userRepository.save(user);
+	    }else {
+	        String currentProfilePicture = user.getProfilePicture();
+	        String newProfilePicture = oAuth2User.getAttribute("picture");
+	        if (newProfilePicture != null && !newProfilePicture.equals(currentProfilePicture)) {
+	            user.setProfilePicture(newProfilePicture);
+	            userRepository.save(user);
+	        }
 	    }
 	   
 	    SimpleGrantedAuthority authority = new SimpleGrantedAuthority(user.getUserRole().name());

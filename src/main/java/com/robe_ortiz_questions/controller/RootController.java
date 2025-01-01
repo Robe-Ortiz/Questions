@@ -13,6 +13,11 @@ public class RootController {
 		return "home";
 	}	
 	
+    @GetMapping("/profile")
+    public String logoutSuccess() {       
+        return "profile";
+    }
+	
 	@GetMapping("zero")
 	public String getMethodName() {
 		int i = 5/0;

@@ -13,9 +13,12 @@
 				<li class="nav-item active"><a class="nav-link"
 					th:href="@{/question/all}">Questions</a></li>
 				<li class="nav-item active"><a class="nav-link"
+					th:href="@{/question-statistics}">Question Statistics</a></li>
+				<li class="nav-item active"><a class="nav-link"
 					th:if="${user == null}" th:href="@{/oauth2/authorization/google}">Login</a></li>
-				<li class="nav-item dropdown" th:if="${user != null and user.userRole.name() == 'ADMIN'}">
-					<a class="nav-link dropdown-toggle" href="#" id="questionsDropdown"
+				<li class="nav-item dropdown"
+					th:if="${user != null and user.userRole.name() == 'ADMIN'}"><a
+					class="nav-link dropdown-toggle" href="#" id="questionsDropdown"
 					role="button" data-bs-toggle="dropdown" aria-expanded="false">
 						Administration </a>
 					<ul class="dropdown-menu" aria-labelledby="questionsDropdown">
@@ -24,10 +27,7 @@
 						<li><a class="dropdown-item"
 							th:href="@{/question/new/question-file}">Add Question File</a></li>
 						<li><hr class="dropdown-divider"></li>
-						<li><a class="dropdown-item" th:href="@{/}">Question
-								Statistics</a></li>
-					</ul>
-				</li>
+					</ul></li>
 			</ul>
 			<!-- User -->
 			<ul class="navbar-nav ms-auto me-5" th:if="${user != null}">

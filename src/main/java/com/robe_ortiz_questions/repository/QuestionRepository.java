@@ -16,6 +16,8 @@ public interface QuestionRepository extends JpaRepository<Question, Long>{
 	Page<Question> findByCategoryOrderByIdAsc(CategoryOfQuestion category, Pageable pageable);
 	
 	List<Question> findByCategory(CategoryOfQuestion category);
+	
+	long countByCategory(CategoryOfQuestion category);
 	 
 	boolean existsByQuestion(String question);
 }
