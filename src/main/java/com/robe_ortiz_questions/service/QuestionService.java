@@ -25,109 +25,96 @@ public class QuestionService {
 	@Autowired
 	private QuestionRepository questionRepository;
 
-    public void updateQuestion(Long id, Question updatedQuestion) {
-        Question existingQuestion = questionRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Pregunta no encontrada con ID: " + id));
+	public void updateQuestion(Long id, Question updatedQuestion) {
+		Question existingQuestion = questionRepository.findById(id)
+				.orElseThrow(() -> new IllegalArgumentException("Pregunta no encontrada con ID: " + id));
 
-        existingQuestion.setQuestion(updatedQuestion.getQuestion());
-        existingQuestion.setCategory(updatedQuestion.getCategory());
+		existingQuestion.setQuestion(updatedQuestion.getQuestion());
+		existingQuestion.setCategory(updatedQuestion.getCategory());
 
-        if (existingQuestion instanceof TrueOrFalseQuestion && updatedQuestion instanceof TrueOrFalseQuestion) {
-            ((TrueOrFalseQuestion) existingQuestion).setAnswer(((TrueOrFalseQuestion) updatedQuestion).getAnswer());
-        } else if (existingQuestion instanceof MultipleQuestion && updatedQuestion instanceof MultipleQuestion) {
-            ((MultipleQuestion) existingQuestion).setCorrectAnswers(((MultipleQuestion) updatedQuestion).getCorrectAnswers());
-            ((MultipleQuestion) existingQuestion).setIncorrectAnswers(((MultipleQuestion) updatedQuestion).getIncorrectAnswers());
-        }
+		if (existingQuestion instanceof TrueOrFalseQuestion && updatedQuestion instanceof TrueOrFalseQuestion) {
+			((TrueOrFalseQuestion) existingQuestion).setAnswer(((TrueOrFalseQuestion) updatedQuestion).getAnswer());
+		} else if (existingQuestion instanceof MultipleQuestion && updatedQuestion instanceof MultipleQuestion) {
+			((MultipleQuestion) existingQuestion)
+					.setCorrectAnswers(((MultipleQuestion) updatedQuestion).getCorrectAnswers());
+			((MultipleQuestion) existingQuestion)
+					.setIncorrectAnswers(((MultipleQuestion) updatedQuestion).getIncorrectAnswers());
+		}
 
-        questionRepository.save(existingQuestion);
-    }
-	
+		questionRepository.save(existingQuestion);
+	}
+
 	public void deleteAll() {
 		questionRepository.deleteAll();
 	}
-	
-	public List<Question> findAllQuestions(){
+
+	public List<Question> findAllQuestions() {
 		return questionRepository.findAll();
 	}
-		
+
 	public Question getQuestionById(long id) {
 		return questionRepository.findById(id).orElse(null);
 	}
-	
+
 	public void deleteById(Long id) {
-		questionRepository.deleteById(id);		
+		questionRepository.deleteById(id);
 	}
-	
+
 	public Question save(Question question) {
 		return questionRepository.save(question);
 	}
-	
- 	public Page<Question> getAllQuestionsPageables(){
- 		PageRequest pageable = PageRequest.of(0, 10, Sort.by(Sort.Order.asc("id")));
- 		return questionRepository.findAll(pageable);
- 	}
- 	
- 	public Page<Question> getAllQuestionsPageables(int page, int size){
- 		PageRequest pageable = PageRequest.of(page, size, Sort.by(Sort.Order.asc("id")));
- 		return questionRepository.findAll(pageable);
- 	}
- 	 	
- 	public Page<Question> getAllQuestionsPageables(CategoryOfQuestion category, int page, int size) {
- 		PageRequest pageable = PageRequest.of(page, size);
- 		return questionRepository.findByCategoryOrderByIdAsc(category, pageable);
- 	}
- 	
- 	public List<Integer> getNumbersOfPages(Page<Question> questionPage){
- 		return IntStream.range(0, questionPage.getTotalPages())
- 				.boxed()
- 				.collect(Collectors.toList());
- 	}
- 	
- 	public void saveQuestion(Question question) {
- 		questionRepository.save(question);
- 	}
 
-	public void processQuestionsFromTheServerFile(String classPath) {
-		ObjectMapper objectMapper = new ObjectMapper();
-		ClassPathResource resource = new ClassPathResource(classPath);
+	public Page<Question> getAllQuestionsPageables() {
+		PageRequest pageable = PageRequest.of(0, 10, Sort.by(Sort.Order.asc("id")));
+		return questionRepository.findAll(pageable);
+	}
 
-		try {
-			String jsonString = new String(Files.readAllBytes(resource.getFile().toPath()));
-			List<Question> questions = objectMapper.readValue(jsonString,
-					objectMapper.getTypeFactory().constructCollectionType(List.class, Question.class));
-			for (Question question : questions) {
-	        	if (!questionRepository.existsByQuestion(question.getQuestion())) {
-	        		questionRepository.save(question);
-	        	}
+	public Page<Question> getAllQuestionsPageables(int page, int size) {
+		PageRequest pageable = PageRequest.of(page, size, Sort.by(Sort.Order.asc("id")));
+		return questionRepository.findAll(pageable);
+	}
+
+	public Page<Question> getAllQuestionsPageables(CategoryOfQuestion category, int page, int size) {
+		PageRequest pageable = PageRequest.of(page, size);
+		return questionRepository.findByCategoryOrderByIdAsc(category, pageable);
+	}
+
+	public List<Integer> getNumbersOfPages(Page<Question> questionPage) {
+		return IntStream.range(0, questionPage.getTotalPages()).boxed().collect(Collectors.toList());
+	}
+
+	public void saveQuestion(Question question) {
+		questionRepository.save(question);
+	}
+
+	private void saveQuestionsFromFile(List<Question> questions) {
+		for (Question question : questions) {
+			if (!questionRepository.existsByQuestion(question.getQuestion())) {
+				if (question instanceof MultipleQuestion
+						&& ((MultipleQuestion) question).getIncorrectAnswers().size() < 3) {
+					System.err.println("Error tamaño incorrect answer");
+					throw new IllegalArgumentException(
+							"Todas las preguntas de múltiple elección deben tener como mínimo tres respuestas incorrectas.");
+				} else {
+					questionRepository.save(question);
+				}
 			}
-		} catch (IOException e) {
-			System.err.println("Failure to load server file questions");
-			e.printStackTrace();
 		}
 	}
 
-	public void processQuestionsFromTheFormFile(String jsonContent) {
-	    ObjectMapper objectMapper = new ObjectMapper();
-	    try {	       
-	        List<Question> questions = objectMapper.readValue(jsonContent,
-	                objectMapper.getTypeFactory().constructCollectionType(List.class, Question.class));
-	       
-	        for (Question question : questions) {
-	        	if (!questionRepository.existsByQuestion(question.getQuestion())) {
-	        		questionRepository.save(question);
-	        	}
-	        		
-	        }
-	    } catch (IOException e) {
-	       System.err.println("Failure to load form questions");
-	       e.printStackTrace();
-	    }
+	public void processQuestionsFromTheServerFile(String classPath) throws IOException, IllegalArgumentException {
+		ObjectMapper objectMapper = new ObjectMapper();
+		ClassPathResource resource = new ClassPathResource(classPath);
+		String jsonString = new String(Files.readAllBytes(resource.getFile().toPath()));
+		List<Question> questions = objectMapper.readValue(jsonString,
+				objectMapper.getTypeFactory().constructCollectionType(List.class, Question.class));
+		saveQuestionsFromFile(questions);
 	}
 
-
-
-
-
-	
-
+	public void processQuestionsFromTheFormFile(String jsonContent) throws IOException, IllegalArgumentException {
+		ObjectMapper objectMapper = new ObjectMapper();
+		List<Question> questions = objectMapper.readValue(jsonContent,
+				objectMapper.getTypeFactory().constructCollectionType(List.class, Question.class));
+		saveQuestionsFromFile(questions);
+	}
 }

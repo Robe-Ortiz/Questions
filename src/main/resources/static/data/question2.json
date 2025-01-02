@@ -1,0 +1,15 @@
+[
+    {
+      "question": "¿Cuál de las siguientes palabras clave se utiliza para definir una constante en Java?",
+      "incorrectAnswers": [
+        "finalize",
+        "const"
+      ],
+      "correctAnswers": [
+        "final",
+        "static final"
+      ],
+      "typeOfQuestion": "MULTIPLE_QUESTION",
+      "category": "PROGRAMACIÓN"
+    }
+]

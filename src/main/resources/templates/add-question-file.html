@@ -4,13 +4,15 @@
 
 <body class="bg-dark questions">
 	<div th:replace="~{fragments/navbar :: navbar}"></div>
-	
 
+	<div th:if="${error}" class="alert alert-danger" role="alert">
+		<span th:text="${error}"></span>
+	</div>
 
 	<main class="container mt-5 text-center">
 		<h1 class="mb-5">Cargar archivo JSON de Preguntas</h1>
-		
-		
+
+
 		<form method="post" action="/question/upload"
 			enctype="multipart/form-data">
 			<div>
@@ -19,7 +21,7 @@
 			</div>
 			<button class="mt-5 btn btn-light" type="submit">Subir</button>
 		</form>
-		<h2 th:if="${message}" th:text="${message}" class="text-danger mt-5"></h2>
+
 	</main>
 
 	<div th:replace="~{fragments/scripts :: scripts}"></div>

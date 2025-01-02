@@ -1,5 +1,6 @@
 package com.robe_ortiz_questions.controller;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -153,9 +154,7 @@ public class QuestionController {
 	    }
 
 	    return "question-edit";
-	}
-
-    
+	} 
 
 
 	@GetMapping("/delete/all")
@@ -183,14 +182,14 @@ public class QuestionController {
 	
 
 	@GetMapping("/load/{fileName}")
-	public String processQuestionsFromTheServerFile(@PathVariable("fileName") String fileName, Model model) {
+	public String processQuestionsFromTheServerFile(@PathVariable("fileName") String fileName, Model model, RedirectAttributes redirectAttributes) {
 		try {
 			questionService.processQuestionsFromTheServerFile("static/data/" + fileName + ".json");
-		} catch (JpaSystemException e) {
-			System.err.println("Failure to load server file questions");
-			e.printStackTrace();
+			model.addAttribute("questions", questionService.getAllQuestionsPageables());
+			redirectAttributes.addFlashAttribute("success", "Todas las preguntas del archivo han sido incluidas correctamente.");
+		} catch (IOException | IllegalArgumentException e) {			
+			redirectAttributes.addFlashAttribute("error", e.getMessage());
 		}
-		model.addAttribute("questions", questionService.getAllQuestionsPageables());
 		return "redirect:/question/all";
 	}
 
@@ -213,8 +212,8 @@ public class QuestionController {
 			redirectAttributes.addFlashAttribute("success", "Todo bien");
 			
 			return "redirect:/question/all";
-		} catch (Exception e) {
-			model.addAttribute("message", "Failed to process the file");
+		} catch (IOException | IllegalArgumentException e) {
+			model.addAttribute("error", e.getMessage());
 			return "add-question-file";
 		}
 	}
